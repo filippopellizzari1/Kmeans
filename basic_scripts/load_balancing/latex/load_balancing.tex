@@ -1,0 +1,108 @@
+\documentclass{report}
+\usepackage[a4paper, margin=0.5in]{geometry}
+\usepackage{parskip}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+
+\captionsetup[figure]{
+  font = it,
+  labelfont = bf
+}
+
+\begin{document}
+  \begin{minipage}[b]{0.48\textwidth}
+    \section*{Load balancing in standard kMeans}
+    Suppose that the standard kMeans algorithm is executed in parallel by splitting between T threads the total points N. In this case the work load is easly divided equally between the threads. In fact we can calculate the total number of points to assign each thread by N/T; if N is not a multiple of T we will also have a reminder (r)
+    \begin{equation}
+      r = N \text{ mod } T < T
+    \end{equation}
+    If this is the case, we can simply assign the firsts r threads one more point, therefore in the end there will be r threads with N/T + 1 points and T - r threads with N/T points.
+
+    \section*{Load balancing in Hamerly's algorithm}
+    With Hamerly's algorithm, efficient load balancing is not as easy as in the standard version because, for every cycle, it is not neccessary to compute the distances for every points but only for critical ones. Because of this, if the points were simply divided among the threads, it might happen that some have many points while others could have few calculations to do.
+
+    \begin{center}
+      \includegraphics[width = 0.8\textwidth]{imgs/non_balances_hamerly.png}
+      \captionof{figure}{Non balanced point division}
+      \label{fig:non_bal_ham}
+    \end{center}
+
+    The Figure \ref{fig:non_bal_ham} shows an input matrix (N x D, where D is the data dimensionality) where critical points are not  equally distribuited. In this case, the first thread will have three critical points whereas the second thread will have zero.
+
+    To implement an efficient load balacing, a more advanced strategy is needed and one possible solution will be presented in the following part of this report. 
+    
+    \subsection*{Points assigment for Hamerly's algorithm}
+    First of all remember that, in the Hamerly's algorithm, after that each centroid moved it is neccessary to update the upper bound ($\mu$) and the lower bound ($l$) of each point. This operation can be done in parallel, since the update is indipendent between the points, and no special cautions are required when splitting the points because the work that has to be done is equal for each point. 
+
+    During this phase, each thread will have a linked list where it adds every critical point that it finds, moreover every time it finds a critical it increments by one the value of a global array which has a length of T so that each thread has its own index to access.
+
+    After that all points have been iterated a synchronization is required. During this sequential part it is calculated the total number of critical points that have been found, also, during this step, a second array is created that length
+  \end{minipage}
+  \hspace{0.15in}
+  \raisebox{0in}{
+  \begin{minipage}[b]{0.48\textwidth}
+    At this point, every thread can insert, inside this new array, its critical points. In order to do that, every thread has to start inserting its values from the index which is equal to the sum of the number of criticals found by the previous threads.
+
+    For example, if there are 3 threads and they found respectively [2, 3, 1] criticals then, they start inserting values from the 0, 2 and 5 (2 + 3) index. The objective of this step is to create an array containing all the critical points together because in this way it is possible to equally divide those critical between the threads. 
+
+    If the total number of critical points is $N_c$ then, the number of criticals to assign each thread can be calculated as $N_c / T$. If $N_c$ is not a multiple of T, there will also be a remainder which can be handled the same way as in the standard case. Below is the pseudo code where N is the total numer of points and P is the array containing all points.
+
+    \begin{algorithm}[H]
+      \caption{kMeans class assigment pseudo-code}\label{alg:cap}
+      \begin{algorithmic}
+        \State --------------------------------------------- \Comment Sequentially
+        \State Let $C_{max}$ be the centroid which moved the most 
+        \State Let $C_{2nd}$ be the 2nd centroid which moved the most
+        \State Let nC be the array with the number of criticals found by each thread 
+        \State (Remainder) r = N \% T
+        \State --------------------------------------------- \Comment In Parallel
+        \State Let i be the id of the current thread 
+        \State Let L be the list of criticals found by the thread
+
+        \State$N_i = Int(N/T)$
+        \State offset = r
+
+        \If{$i < r$}
+          \State $N_i = N_i + 1$
+          \State offset = 0
+        \EndIf
+
+        \State
+        \For{$j < N_i$}
+          \State point = P[$i\cdot N_i + $ offset]
+          \State point.$\mu$ = point.$\mu$ + point.centroid.distance
+          \If{point.centroid == $C_{max}$}
+            \State point.l = point.l - $C_{2nd}.distance$
+          \Else
+            \State point.l = point.l - $C_{max}.distance$
+          \EndIf
+
+          \If{point.$\mu >$ point.l}
+            \State L.push(point)
+            \State nC[i] = nC[i] + 1
+          \EndIf
+        \EndFor
+        \State --------------------------------------------- \Comment Sequentially 
+        \State sum = 0
+        \For{j $<$ nC.length}
+          \State sum = sum + nC[j]
+        \EndFor
+
+        \State Let cL be the array (of length sum) with all the criticals 
+        \State --------------------------------------------- \Comment In Parallel 
+        \State index = 0
+        \For{j $<$ i}
+          \State index = index + nC[j]
+        \EndFor
+        \State 
+        \For{j $<$ nC[i]}
+          \State cL[index + j] = L.pop 
+        \EndFor
+      \end{algorithmic}
+  \end{algorithm}
+  \end{minipage}}
+\end{document}
