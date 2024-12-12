@@ -20,7 +20,7 @@
     \begin{equation}
       r = N \text{ mod } T < T
     \end{equation}
-    If this is the case, we can simply assign the firsts r threads one more point, therefore in the end there will be r threads with N/T + 1 points and T - r threads with N/T points.
+    If this is the case, we can simply assign the first r threads one more point, therefore in the end there will be r threads with N/T + 1 points and T - r threads with N/T points.
 
     \section*{Load balancing in Hamerly's algorithm}
     With Hamerly's algorithm, efficient load balancing is not as easy as in the standard version because, for every cycle, it is not neccessary to compute the distances for every points but only for critical ones. Because of this, if the points were simply divided among the threads, it might happen that some have many points while others could have few calculations to do.
@@ -36,7 +36,7 @@
     To implement an efficient load balacing, a more advanced strategy is needed and one possible solution will be presented in the following part of this report. 
     
     \subsection*{Points assigment for Hamerly's algorithm}
-    First of all remember that, in the Hamerly's algorithm, after that each centroid moved it is neccessary to update the upper bound ($\mu$) and the lower bound ($l$) of each point. This operation can be done in parallel, since the update is indipendent between the points, and no special cautions are required when splitting the points because the work that has to be done is equal for each point. 
+    First of all remember that, in the Hamerly's algorithm, after that each centroid moved it is neccessary to update the upper bound (ub) and the lower bound ($lu$) of each point. This operation can be done in parallel, since the update is indipendent between the points, and no special cautions are required when splitting the points because the work that has to be done is equal for each point. 
 
     During this phase, each thread will have a linked list where it adds every critical point that it finds, moreover every time it finds a critical it increments by one the value of a global array which has a length of T so that each thread has its own index to access.
 
@@ -61,7 +61,7 @@
         \State (Remainder) r = N \% T
         \State --------------------------------------------- \Comment In Parallel
         \State Let i be the id of the current thread 
-        \State Let L be the list of criticals found by the thread
+        \State Let $L_i$ be the list of criticals found by the i-th thread
 
         \State$N_i = Int(N/T)$
         \State offset = r
@@ -74,15 +74,15 @@
         \State
         \For{$j < N_i$}
           \State point = P[$i\cdot N_i + $ offset]
-          \State point.$\mu$ = point.$\mu$ + point.centroid.distance
+          \State point.ub = point.ub+ point.centroid.distance
           \If{point.centroid == $C_{max}$}
-            \State point.l = point.l - $C_{2nd}.distance$
+            \State point.lb = point.lb - $C_{2nd}.distance$
           \Else
-            \State point.l = point.l - $C_{max}.distance$
+            \State point.lb = point.lb - $C_{max}.distance$
           \EndIf
 
-          \If{point.$\mu >$ point.l}
-            \State L.push(point)
+          \If{point.$ub>$ point.lb}
+            \State $L_i$.push(point)
             \State nC[i] = nC[i] + 1
           \EndIf
         \EndFor
@@ -92,7 +92,7 @@
           \State sum = sum + nC[j]
         \EndFor
 
-        \State Let cL be the array (of length sum) with all the criticals 
+        \State Let A be the array of all the criticals (A.length = sum)
         \State --------------------------------------------- \Comment In Parallel 
         \State index = 0
         \For{j $<$ i}
@@ -100,9 +100,125 @@
         \EndFor
         \State 
         \For{j $<$ nC[i]}
-          \State cL[index + j] = L.pop 
+          \State A[index + j] = $L_i$.pop 
         \EndFor
       \end{algorithmic}
   \end{algorithm}
+  \end{minipage}}
+
+  \newpage
+
+  \begin{minipage}[b]{0.48\textwidth}
+    \subsection*{Insight into the opseudo code}
+    Because some of the steps in the pseudocode may not be immediate in understanding what they do and why they are used, this part will give an overview of those instructions that may be less clear.
+
+    \begin{algorithm}[H]
+      \caption{The offset variable}
+      \begin{algorithmic}
+        \State offset = r
+
+        \If{$i < r$}
+          \State offset = 0
+        \EndIf
+      \end{algorithmic}
+    \end{algorithm}
+
+    The need of this variable comes from the fact that the first r threads (where r is the remainder of N/T) have to access N/T + 1 elements while the other threads have to access N/T this inequality is the reason why we need to introduce the variable offset.
+
+    Suppose we have N = 20 and k = 3 (where k is the number of threads) then
+    \begin{equation*}
+      N_i = Int(20 / 3) = 6 \text{ and } r = 20 \text{ mod } 3 = 2
+    \end{equation*}
+    Therefore the first two thread have to access 7 elements while the last one will acces 6. Which from the indeces point of view would mean that the
+    \begin{equation*}
+      \text{Thread1 indices} \rightarrow [0, 6]
+    \end{equation*}
+    \begin{equation*}
+      \text{Thread2 indices} \rightarrow [7, 13]
+    \end{equation*}
+    \begin{equation*}
+      \text{Thread3 indices} \rightarrow [14, 19]
+    \end{equation*}
+
+    To calculate the first two set of indeces it is easy because we can just use the thread id (i) and the following formula
+    \begin{equation}\label{eq:ind1set}
+      \mathbf{[}(i - 1) \cdot (N_i + 1) \hspace{0.05in}\mathbf{,}\hspace{0.05in} (i - 1) \cdot (N_i + 1) + N_i\mathbf{]}
+    \end{equation}
+
+    The problem comes for the other threads, in this case the third one. For all the thread that access $N_i$ values (not $N_i + 1$) another equation has to be used
+    \begin{equation*}
+      \mathbf{[}(i - 1) \cdot N_i + r \hspace{0.05in}\mathbf{,}\hspace{0.05in} (i - 1) \cdot N_i + r + N_i - 1\mathbf{]}
+    \end{equation*}
+
+    The reason why we need to change equation to calculate the second groups of indeces is because every time we use the equation (\ref{eq:ind1set}) we introduce a shift of one with respect to the indeces that would have been calculated as
+    \begin{equation*}
+      \mathbf{[}(i - 1) \cdot N_i \hspace{0.05in}\mathbf{,}\hspace{0.05in} (i - 1) \cdot N_i + N_i - 1\mathbf{]}
+    \end{equation*}
+    Which would be the equation to use if all thread were to access $N_i$ points.
+
+    Since we use equation (\ref{eq:ind1set}) r times the shift will be r in the end. 
+    Finally, notice the if statement because when applying equation (\ref{eq:ind1set}) the offset is not needed therefore we need to distiguish between the two cases.
+
+    Note also that in all equations, (i - 1) was used because we considered thread ids starting from 1, but it is just a convention, if the indexes started from 0 then it would have been correct to use only i.
+
+    \begin{algorithm}[H]
+      \caption{$N_i$ increment}
+      \begin{algorithmic}
+        \If{$i < r$}
+          \State $N_i = N_i + 1$
+        \EndIf
+      \end{algorithmic}
+    \end{algorithm}
+  \end{minipage}
+  \hspace{0.1in}
+  \raisebox{2.5in}{
+  \begin{minipage}[b]{0.48\textwidth}
+    This if statement is implemented to increase by one the number of points that the first r threads have to access.
+
+    \begin{algorithm}[H]
+      \caption{point.centroid.distance}
+      \begin{algorithmic}
+        \State point.ub = point.ub+ point.centroid.distance
+      \end{algorithmic}
+    \end{algorithm}
+
+    Through point.centroid we access the centroid assigned to the point and with centroid.distance we access the distance taken by the centroid during its last movement.
+
+    At every iteration the upper bound of each point, which is accessed by point.ub, has to be updated and the new value will be: point.ub = point.ub + point.centroid.distance. 
+
+    \begin{algorithm}[H]
+      \caption{lower bound update}
+      \begin{algorithmic}
+        \If{point.centroid == $C_{max}$}
+          \State point.lb = point.lb - $C_{2nd}.distance$
+        \Else
+          \State point.lb = point.lb - $C_{max}.distance$
+        \EndIf
+      \end{algorithmic}
+    \end{algorithm}
+
+    When it comes to updating the lower limit, the first thing to check is whether the centroid that moved the most is also the one assigned to the point. In this case, the lower limit cannot be updated with the distance of that centroid because it has already been used for the upper limit, but in this case the distance taken from the second centroid that moved the most has to be used.
+
+    \begin{algorithm}[H]
+      \caption{lower bound update}
+      \begin{algorithmic}
+        \State index = 0
+        \For{j $<$ i}
+          \State index = index + nC[j]
+        \EndFor
+      \end{algorithmic}
+    \end{algorithm}
+
+    This is the part where each thread calculate the index from where it has to start inserting the vales in the global array containing all the critical points (i is always the id of the current thread).
+
+    \begin{algorithm}[H]
+      \caption{add values to the global array}
+      \begin{algorithmic}
+        \For{j $<$ nC[i]}
+          \State A[index + j] = $L_i$.pop 
+        \EndFor       
+      \end{algorithmic}
+    \end{algorithm}
+    This is the last part of the algorithm where every thread inserts into the global array the value of its list.
   \end{minipage}}
 \end{document}
