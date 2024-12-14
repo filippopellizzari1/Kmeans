@@ -9,20 +9,18 @@ class Point
 {
     private:
         int d;
-        float dist;
         vector<float> coords;
         Point * centroid;
 
     public:
+        float dist, ub, lb;
         Point( int _d, float * _coords );
         Point( const Point &p );
 
         float get_coord( int i ) const;
         int get_dim() const;
         void set_centroid( Point * _centroid ); 
-        Point * get_centroid(); 
-        void set_disance( float _dist );
-        float get_distance();
+        Point * get_centroid() const; 
         float distance( const Point &p1, const Point &p2 );
 
         friend bool operator == ( const Point &p1, const Point &p2 );

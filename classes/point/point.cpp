@@ -5,6 +5,8 @@
 Point::Point( int _d, float * _coords )
 {
     dist = 0;
+    ub = 0;
+    lb = 0;
     centroid = NULL;
     d = _d;
 
@@ -16,6 +18,10 @@ Point::Point( int _d, float * _coords )
 Point::Point( const Point &p )
 {
     d = p.get_dim();
+    centroid = p.get_centroid();
+    ub = p.ub;
+    lb = p.lb;
+    dist = p.dist;
 
     for ( int i = 0; i < d; i++ )
         coords.push_back( p.get_coord( i ) );
@@ -49,19 +55,9 @@ void Point::set_centroid( Point * _centroid )
     centroid = _centroid;
 }
 
-Point * Point::get_centroid()
+Point * Point::get_centroid() const
 {
     return centroid;
-}
-
-void Point::set_disance( float _dist )
-{
-    dist = _dist;
-}
-
-float Point::get_distance()
-{
-    return dist;
 }
 
 ostream& operator <<( ostream &os, const Point &p )
