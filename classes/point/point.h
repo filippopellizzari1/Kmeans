@@ -22,7 +22,7 @@ class Point
         int get_dim() const;
         void set_centroid( Point * _centroid ); 
         Point * get_centroid() const; 
-        float distance( const Point &p1, const Point &p2 );
+        float distance( const Point &p2 );
 
         friend bool operator == ( const Point &p1, const Point &p2 );
         friend Point operator + ( const Point &p1, const Point &p2 );

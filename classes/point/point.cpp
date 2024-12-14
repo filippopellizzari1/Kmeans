@@ -41,15 +41,15 @@ float Point::get_coord( int i ) const
     return coords[i];
 }
 
-float Point::distance( const Point &p1, const Point &p2 )
+float Point::distance( const Point &p )
 {
-    if ( p1.get_dim() != p2.get_dim() )
+    if ( d != p.get_dim() )
         throw invalid_argument( "Cannot calculate distance between points with different dimensionality" ); 
 
     float sumofsquare = 0;
 
-    for ( int i = 0; i < p1.get_dim(); i++ )
-        sumofsquare += pow( p1.get_dim() + p2.get_dim(), 2 );
+    for ( int i = 0; i < d; i++ )
+        sumofsquare += pow( coords[i] + p.get_coord( i ), 2 );
 
     return sqrt( sumofsquare );
 }
