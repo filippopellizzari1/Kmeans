@@ -14,6 +14,7 @@ class Point
 
     public:
         float dist, ub, lb;
+        Point();
         Point( int _d, float * _coords );
         Point( const Point &p );
 

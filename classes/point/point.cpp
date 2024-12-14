@@ -2,6 +2,15 @@
 #include <cmath>
 #include "point.h"
 
+Point::Point()
+{
+    d = 0;
+    centroid = NULL;
+    dist = 0;
+    ub = 0;
+    lb = 0;
+}
+
 Point::Point( int _d, float * _coords )
 {
     dist = 0;
