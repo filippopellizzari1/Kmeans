@@ -9,6 +9,8 @@ Point::Point()
     dist = 0;
     ub = 0;
     lb = 0;
+    coords = NULL;
+    centroid_index = -1;
 }
 
 Point::Point( int _d, float * _coords )
@@ -18,9 +20,11 @@ Point::Point( int _d, float * _coords )
     lb = 0;
     centroid = NULL;
     d = _d;
+    centroid_index = -1;
+    coords = new float[d];
 
     for ( int i = 0; i < _d; i++ )
-        coords.push_back( _coords[i] );
+        coords[i] = _coords[i];
 }
 
 // Copy constructor
@@ -31,14 +35,30 @@ Point::Point( const Point &p )
     ub = p.ub;
     lb = p.lb;
     dist = p.dist;
+    centroid_index = p.centroid_index;
+
+    if (coords != NULL)
+        delete[] coords;
+
+    coords = new float[d];
 
     for ( int i = 0; i < d; i++ )
-        coords.push_back( p.get_coord( i ) );
+        coords[i] =  p.get_coord( i );
+}
+
+Point::~Point()
+{
+    delete[] coords;
 }
 
 float Point::get_coord( int i ) const
 {
     return coords[i];
+}
+
+void Point::set_coord( int i, float val )
+{
+    coords[i] = val;
 }
 
 float Point::distance( const Point &p )
@@ -49,7 +69,7 @@ float Point::distance( const Point &p )
     float sumofsquare = 0;
 
     for ( int i = 0; i < d; i++ )
-        sumofsquare += pow( coords[i] + p.get_coord( i ), 2 );
+        sumofsquare += pow( coords[i] - p.get_coord( i ), 2 );
 
     return sqrt( sumofsquare );
 }
@@ -59,9 +79,10 @@ int Point::get_dim() const
     return d;
 }
 
-void Point::set_centroid( Point * _centroid )
+void Point::set_centroid( Point * _centroid, int _centroid_index )
 {
     centroid = _centroid;
+    centroid_index = _centroid_index;
 }
 
 Point * Point::get_centroid() const
@@ -71,7 +92,7 @@ Point * Point::get_centroid() const
 
 ostream& operator <<( ostream &os, const Point &p )
 {
-    os << "Point( ";
+    os << "Point( {";
 
     for ( int i = 0; i < p.get_dim(); i++ )
     {
@@ -83,7 +104,7 @@ ostream& operator <<( ostream &os, const Point &p )
             os << " ";
     }
 
-    os << ")";
+    os << "}, c: " <<  p.centroid_index << ", d: " << p.get_dim() << ", lu: " << p.lb << ", ub: " << p.ub << " )";
 
     return os;
 }
@@ -115,4 +136,24 @@ Point operator + ( const Point &p1, const Point &p2 )
     delete[] coords;
 
     return temp;
+}
+
+Point& Point::operator= ( const Point &p )
+{
+    d = p.get_dim();
+    centroid = p.get_centroid();
+    ub = p.ub;
+    lb = p.lb;
+    dist = p.dist;
+    centroid_index = p.centroid_index;
+
+    if (coords != NULL)
+        delete[] coords;
+
+    coords = new float[d];
+
+    for ( int i = 0; i < d; i++ )
+        coords[i] =  p.get_coord( i );  
+
+    return *this;
 }
