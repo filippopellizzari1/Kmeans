@@ -21,8 +21,8 @@ Point::Point( int _d, float * _coords )
     centroid = NULL;
     d = _d;
     centroid_index = -1;
-    coords = new float[d];
 
+    coords = new float[d];
     for ( int i = 0; i < _d; i++ )
         coords[i] = _coords[i];
 }
@@ -44,6 +44,19 @@ Point::Point( const Point &p )
 
     for ( int i = 0; i < d; i++ )
         coords[i] =  p.get_coord( i );
+}
+
+Point::Point( int _d, float * _coords, float _dist, float _ub, float _lb, int _centroid_index)
+{
+    d = _d;
+    dist = _dist;
+    ub = _ub;
+    lb = _lb;
+    centroid_index = _centroid_index;
+    
+    coords = new float[d];
+    for ( int i = 0; i < d; i++ )
+        coords[i] = _coords[i];
 }
 
 Point::~Point()
@@ -71,7 +84,7 @@ float Point::distance( const Point &p )
     for ( int i = 0; i < d; i++ )
         sumofsquare += pow( coords[i] - p.get_coord( i ), 2 );
 
-    return sqrt( sumofsquare );
+    return sumofsquare;
 }
 
 int Point::get_dim() const
@@ -92,7 +105,7 @@ Point * Point::get_centroid() const
 
 ostream& operator <<( ostream &os, const Point &p )
 {
-    os << "Point( {";
+    os << "Coords: ";
 
     for ( int i = 0; i < p.get_dim(); i++ )
     {
@@ -101,10 +114,10 @@ ostream& operator <<( ostream &os, const Point &p )
         if ( i != p.get_dim() - 1)
             os << ", ";
         else
-            os << " ";
+            os << "; ";
     }
 
-    os << "}, c: " <<  p.centroid_index << ", d: " << p.get_dim() << ", lu: " << p.lb << ", ub: " << p.ub << " )";
+    os << "C: " <<  p.centroid_index << "; D: " << p.get_dim() << "; LB: " << p.lb << "; UB: " << p.ub << "; DIST: " << p.dist;
 
     return os;
 }

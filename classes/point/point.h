@@ -17,6 +17,7 @@ class Point
         Point();
         Point( int _d, float * _coords );
         Point( const Point &p );
+        Point( int _d, float * _coords, float _dist, float _ub, float _lb, int _centroid_index );
         ~Point();
 
 

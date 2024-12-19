@@ -34,11 +34,11 @@ class kMeans
     void first_assignation( int nThreads );
     void refresh_assignation( int nThreads );
     void update_criticals( int nThreads );
+    float random_float( int min, int max );
     public:
         kMeans( int _d, int _N, int _K );
         ~kMeans();
 
-        float random_float( int min, int max );
         void generate_points( int min, int max ); // generate random points
         void generate_centroids( int min, int max ); // generate random centroids
         void insert_point( int i, const Point * p );
@@ -49,8 +49,6 @@ class kMeans
         void update_centroid( int nThreads );
         void assign_points( int nThreads );
 
-        void export_data( string filename );
-        void load_data( string filename );
         void print_points();
         void print_centroids();
         void print_criticals();
