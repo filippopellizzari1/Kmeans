@@ -1,54 +1,28 @@
-#include "kmeans.h"
+#include "hamerly.h"
 #include "../point/point.h"
 
 #include <string>
 #include <cmath>
 #include <omp.h>
 
-kMeans::kMeans( int _d, int _N, int _K )
+hamerly::hamerly( int _d, int _N, int _K ) : lloyd( _d, _N, _K )
 {
-    d = _d;
-    N = _N;
-    K = _K;
     C = 0;
 
     maxdist = -1;
     secmaxdist = -1;
     maxdist_index = -1;
 
-    points_per_class = new int[K];
-    for ( int i = 0; i < K; i++ )
-        points_per_class[i] = 0;
-
-    average_per_class = new float*[K];
-    for ( int i = 0; i < K; i++ )
-    {
-        average_per_class[i] = new float[d];
-        for ( int j = 0; j < d; j++ )
-            average_per_class[i][j] = 0;
-    }
-
     cdistances = new float[K];
-
-    points = new Point[N];
-    centroids = new Point[K];
     criticals = NULL;
 
     critical_in_threads = NULL;
     nC = NULL;
-
-    srand( time( NULL ) );
 }
 
-kMeans::~kMeans()
+hamerly::~hamerly()
 {
-    delete[] points;
-    delete[] centroids;
     delete[] criticals;
-
-    for ( int i = 0; i < K; i++ )
-        delete[] average_per_class[i];
-    delete[] average_per_class;
 
     delete[] points_per_class;
     delete[] cdistances;
@@ -60,58 +34,8 @@ kMeans::~kMeans()
         delete[] nC;
 }
 
-void kMeans::generate_points( int min, int max )
-{
-    float coords[ d ]; // Coordinates for each points
-    for ( int i = 0; i < N; i++ )
-    {
-        // Generate coord
-        for ( int j = 0; j < d; j++ )
-            coords[j] = random_float( min, max );
 
-        // Insert the point in the list
-        Point temp( d, coords );
-        cout << temp << endl;
-        points[i] = temp;
-    }
-}
-
-void kMeans::generate_centroids( int min, int max )
-{
-    float coords[ d ]; // Coordinates for each points
-    for ( int i = 0; i < K; i++ )
-    {
-        // Generate coord
-        for ( int j = 0; j < d; j++ )
-            coords[j] = random_float( min, max );
-
-        // Insert the point in the list
-        Point temp( d, coords );
-        centroids[i] = temp;
-    }
-}
-
-void kMeans::insert_point( int i, const Point * p )
-{
-    points[i] = *p;
-}
-
-void kMeans::insert_centroid( int i, const Point * c )
-{
-    centroids[i] = *c;
-}
-
-Point * kMeans::get_point( int i )
-{
-    return &points[i];
-}
-
-Point * kMeans::get_centroid( int i )
-{
-    return &centroids[i];
-}
-
-void kMeans::first_assignation( int nThreads )
+void hamerly::first_assignation( int nThreads )
 {
     for ( int i = 0; i < K; i++ )
     {
@@ -177,7 +101,7 @@ void kMeans::first_assignation( int nThreads )
     }
 }
 
-void kMeans::refresh_assignation( int nThreads )
+void hamerly::refresh_assignation( int nThreads )
 {
     #pragma omp parallel num_threads( nThreads )
     {
@@ -248,7 +172,7 @@ void kMeans::refresh_assignation( int nThreads )
     }
 }
 
-void kMeans::assign_points( int nThreads )
+void hamerly::assign_points( int nThreads )
 {
     if ( C == 0 )
         first_assignation( nThreads );
@@ -256,7 +180,7 @@ void kMeans::assign_points( int nThreads )
         refresh_assignation( nThreads );
 }
 
-void kMeans::update_centroid( int nThreads )
+void hamerly::update_centroids( int nThreads )
 {
     #pragma omp parallel num_threads( nThreads )
     {
@@ -320,7 +244,7 @@ void kMeans::update_centroid( int nThreads )
     update_criticals( nThreads );
 }
 
-void kMeans::update_criticals( int nThread )
+void hamerly::update_criticals( int nThread )
 {
     if ( critical_in_threads != NULL )
     {
@@ -404,31 +328,13 @@ void kMeans::update_criticals( int nThread )
     }
 }
 
-void kMeans::print_points()
-{
-    for ( int i = 0; i < N; i++ )
-        cout << points[i] << endl;
-}
-
-void kMeans::print_centroids()
-{
-    for ( int i = 0; i < K; i++ )
-        cout << centroids[i] << endl;
-}
-
-void kMeans::print_criticals()
+void hamerly::print_criticals()
 {
     for ( int i = 0; i < C; i++ )
         cout << *criticals[i] << endl;
 }
 
-int kMeans::get_c()
+int hamerly::get_criticalsNumber()
 {
     return C;
-}
-
-float kMeans::random_float( int min, int max )
-{
-    max -= 1;
-    return min + (rand() % (max - min)) + (float)(rand()) / (float)(RAND_MAX);
 }

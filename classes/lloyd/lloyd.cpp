@@ -44,6 +44,7 @@ lloyd::lloyd( int _d, int _N, int _K )
 
 lloyd::~lloyd()
 {
+    cout << "base distctruor" << endl;
     delete[] points;
     delete[] centroids; 
 
