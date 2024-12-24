@@ -1,5 +1,7 @@
 #include <iostream>
-#include "classes/kmeans/kmeans.h"
+#include "classes/lloyd/lloyd.h"
+#include "classes/hamerly/hamerly.h"
+#include "classes/point/point.h"
 
 using namespace std;
 
@@ -7,31 +9,58 @@ using namespace std;
 #define K 3 // Number of centroids
 #define D 2 // Data dimensionality
 #define T 3 // number of threads
+#define ITE 5 // number of iterations
 
 int main()
-{
-    kMeans model(D, N, K);
-    model.generate_points( 0, 50 );
-    model.generate_centroids( 0, 50 );
+{   
+    lloyd mod1( D, N, K );
+    mod1.generate_points( 0, 50 );
+    mod1.generate_centroids( 0, 50 );
+  
+    hamerly mod2( D, N, K, 3 );
+    for ( int i = 0; i < N; i++ )
+        mod2.insert_point( i, mod1.get_point( i ) );
 
-    cout << "Points" << endl;
-    model.print_points();
-    cout << "Centroids" << endl;
-    model.print_centroids();
+    for ( int i = 0; i < K; i++ )
+        mod2.insert_centroid( i, mod1.get_centroid( i ) );   
 
-    model.assign_points( 1 );
+    for ( int i = 0; i < ITE; i++ )
+    {
+        mod1.assign_points();
+        mod1.update_centroids();
 
-    cout << "Points after assignation" << endl;
-    model.print_points();
-    cout << "Centroids" << endl;
-    model.print_centroids();
+        mod2.assign_points();
+        mod2.update_centroids();
 
-    model.update_centroid( 1 );
+        if ( mod1 == mod2 )
+            cout << "1 == 2" << endl;
+        else
+            cout << "1 != 2" << endl;
 
-    cout << "Points after centriod moved" << endl;
-    model.print_points();
-    cout << "Centroids" << endl;
-    model.print_centroids();
-
-    cout << "Criticals : " << model.get_c() << endl;
+        mod1.export_data( "./testbench_inout/out1.txt" );
+        mod2.export_data( "./testbench_inout/out2.txt" );
+    }
+    
+    cout << "done" << endl << endl;
 }
+
+// lloyd mod1;
+// mod1.load_data( "./testbench_inout/input.txt" );
+
+// hamerly mod2;
+// mod2.load_data( "./testbench_inout/input.txt" );
+
+// for ( int i = 0; i < ITE; i++ )
+// {
+//     mod1.assign_points();
+//     mod1.update_centroids();
+
+//     mod2.assign_points(1);
+//     mod2.update_centroids(1);
+//     mod2.print_criticals();
+
+//     if ( mod1 == mod2 )
+//         cout << "1 == 2" << endl;
+//     else
+//         cout << "1 != 2" << endl;
+// }

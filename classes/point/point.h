@@ -9,26 +9,27 @@ class Point
     private:
         int d;
         Point * centroid;
-        float * coords;
+        double * coords;
 
     public:
-        float dist, ub, lb;
+        double dist, ub, lb;
         int centroid_index;
         Point();
-        Point( int _d, float * _coords );
+        Point( int _d, double * _coords );
         Point( const Point &p );
-        Point( int _d, float * _coords, float _dist, float _ub, float _lb, int _centroid_index );
+        Point( int _d, double * _coords, double _dist, double _ub, double _lb, int _centroid_index );
         ~Point();
 
 
-        float get_coord( int i ) const;
-        void set_coord( int i, float val );
+        double get_coord( int i ) const;
+        void set_coord( int i, double val );
         int get_dim() const;
         void set_centroid( Point * _centroid, int _centroid_index ); 
         Point * get_centroid() const; 
-        float distance( const Point &p );
+        double distance( const Point &p );
 
         friend bool operator == ( const Point &p1, const Point &p2 );
+        friend bool operator != ( const Point &p1, const Point &p2 );
         friend Point operator + ( const Point &p1, const Point &p2 );
         Point& operator =(const Point &p );
 };

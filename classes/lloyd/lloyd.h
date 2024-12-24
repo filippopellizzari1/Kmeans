@@ -16,12 +16,11 @@ class lloyd
         Point * points;
         Point * centroids;
 
-        float ** average_per_class; // this array contains the averaged coordinate of all points in a class
+        double ** average_per_class; // this array contains the averaged coordinate of all points in a class
         int * points_per_class;
 
-        float random_float( int min, int max );
+        double random_double( int min, int max );
     public:
-        lloyd();
         lloyd( int _d, int _N, int _K );
         virtual ~lloyd();
 
@@ -36,10 +35,11 @@ class lloyd
         virtual void assign_points();
         
         void export_data( string filename );
-        void load_data( string filename );
 
         void print_points();
         void print_centroids();
+
+        friend bool operator == ( const lloyd &l1, const lloyd &l2 );
 };
 
 #endif
