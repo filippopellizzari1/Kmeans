@@ -27,7 +27,6 @@ hamerly::~hamerly()
 {
     delete[] criticals;
 
-    delete[] points_per_class;
     delete[] cdistances;
 
     if ( critical_in_threads != NULL )
@@ -39,7 +38,7 @@ hamerly::~hamerly()
 
 void hamerly::first_assignation()
 {   
-    #pragma omp parallel num_threads( nThreads ) reduction( + : points_per_class[:K] )
+    #pragma omp parallel num_threads( nThreads ) reduction( + : points_per_class[:K] ) reduction( + : average_per_class[:(K*d)] )
     {
         int id = omp_get_thread_num();
         int p_per_thread = N / nThreads;
@@ -88,7 +87,17 @@ void hamerly::first_assignation()
             
             for ( int j = 0; j < d; j++ )
             {
-                average_per_class[cent][j] += p -> get_coord( j );
+                average_per_class[cent * d + j] += p -> get_coord( j );
+            }
+
+            if ( p -> centroid_index != -1 )
+            {
+                points_per_class[p -> centroid_index] -= 1;
+            
+                for ( int j = 0; j < d; j++ )
+                {
+                    average_per_class[p -> centroid_index * d + j] -= p -> get_coord( j );
+                }
             }
 
             // assign the point to the closest centroid
@@ -103,7 +112,7 @@ void hamerly::first_assignation()
 
 void hamerly::refresh_assignation()
 {
-    #pragma omp parallel num_threads( nThreads ) reduction( + : points_per_class[:K] )
+    #pragma omp parallel num_threads( nThreads ) reduction( + : points_per_class[:K] ) reduction( + : average_per_class[:(K*d)] )
     {
         int id = omp_get_thread_num();
         int p_per_thread = C / nThreads;
@@ -159,8 +168,8 @@ void hamerly::refresh_assignation()
                 for ( int j = 0; j < d; j++ )
                 {
                     double coord = p -> get_coord(j);
-                    average_per_class[ p -> centroid_index ][j] -= coord;
-                    average_per_class[ cent ][j] += coord;
+                    average_per_class[ p -> centroid_index * d + j] -= coord;
+                    average_per_class[cent * d + j] += coord;
                 }
             }
 
@@ -209,7 +218,7 @@ void hamerly::update_centroids()
             {
                 for ( int j = 0; j < d; j++ )
                 {
-                    double new_coord = average_per_class[cent_index][j] / points_per_class[cent_index];
+                    double new_coord = average_per_class[cent_index * d + j] / points_per_class[cent_index];
                     double old_coord = c -> get_coord( j );
                     sumofsquare += pow( new_coord - old_coord, 2 );
 
@@ -217,7 +226,7 @@ void hamerly::update_centroids()
                 }
             }
 
-            cdistances[cent_index] = sumofsquare;
+            cdistances[cent_index] = sqrt(sumofsquare);
         }
     }
 

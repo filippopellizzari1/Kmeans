@@ -16,7 +16,7 @@ class lloyd
         Point * points;
         Point * centroids;
 
-        double ** average_per_class; // this array contains the averaged coordinate of all points in a class
+        double * average_per_class; // this array contains the averaged coordinate of all points in a class
         int * points_per_class;
 
         double random_double( int min, int max );

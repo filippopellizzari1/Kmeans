@@ -17,13 +17,9 @@ lloyd::lloyd( int _d, int _N, int _K )
     points = new Point[N];
     centroids = new Point[K];
 
-    average_per_class = new double*[K];
-    for ( int i = 0; i < K; i++ )
-    {
-        average_per_class[i] = new double[d];
-        for ( int j = 0; j < d; j++ )
-            average_per_class[i][j] = 0;
-    }
+    average_per_class = new double[K*d];
+    for ( int i = 0; i < K*d; i++ ) 
+        average_per_class[i] = 0;
     
     points_per_class = new int[K];
     for ( int i = 0; i < K; i++ )
@@ -37,8 +33,6 @@ lloyd::~lloyd()
     delete[] points;
     delete[] centroids; 
 
-    for ( int i = 0; i < K; i++ )
-        delete[] average_per_class[i];
     delete[] average_per_class;
 
     delete[] points_per_class;
@@ -126,11 +120,11 @@ void lloyd::assign_points()
         for ( int j = 0; j < d; j++ )
         {
             double coord = p -> get_coord( j );
-            average_per_class[mindist_index][j] += coord; 
+            average_per_class[mindist_index * d + j] += coord; 
                     
             //update average of all points in that class
             if ( p -> centroid_index != -1 ) // if the centroid_index is different from -1 it means that the point has been previously assigned to a class, thereforse its contribuition must be removed from that class and added to the new one
-                average_per_class[ p -> centroid_index ][j] -= coord;
+                average_per_class[p -> centroid_index * d + j] -= coord;
         }
         
         points_per_class[mindist_index] += 1;
@@ -158,7 +152,7 @@ void lloyd::update_centroids()
         if (point_in_class > 0)
             for ( int j = 0; j < d; j++ )
             {
-                double new_coord = average_per_class[i][j] / point_in_class;
+                double new_coord = average_per_class[i * d + j] / point_in_class;
                 c -> set_coord( j, new_coord );
             }
     }

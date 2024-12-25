@@ -9,7 +9,7 @@ using namespace std;
 #define K 3 // Number of centroids
 #define D 2 // Data dimensionality
 #define T 3 // number of threads
-#define ITE 5 // number of iterations
+#define ITE 10 // number of iterations
 
 int main()
 {   
@@ -27,9 +27,9 @@ int main()
     for ( int i = 0; i < ITE; i++ )
     {
         mod1.assign_points();
-        mod1.update_centroids();
-
         mod2.assign_points();
+
+        mod1.update_centroids();
         mod2.update_centroids();
 
         if ( mod1 == mod2 )
