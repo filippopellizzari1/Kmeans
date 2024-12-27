@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1735318715.01288 "c:/Users/filip/Desktop/parallel_computing/kMeans/kMeans/theory/hamerly/hamerly.tex" "hamerly.pdf" "hamerly" 1735318716.95788 0
+["pdflatex"] 1735320538.21017 "c:/Users/filip/Desktop/parallel_computing/kMeans/kMeans/theory/hamerly/hamerly.tex" "hamerly.pdf" "hamerly" 1735320540.27994 0
   "C:/Users/filip/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1734100251 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/filip/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1733577066 11986913 e751051d0161d871cbc6a76442857e0a ""
   "C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
@@ -66,9 +66,9 @@
   "C:/Users/filip/AppData/Local/Programs/MiKTeX/tex/latex/kvsetkeys/kvsetkeys.sty" 1665066333 13815 760b0c02f691ea230f5359c4e1de23a7 ""
   "C:/Users/filip/AppData/Local/Programs/MiKTeX/tex/latex/l3backend/l3backend-pdftex.def" 1716480499 29785 9f93ab201fe5dd053afcc6c1bcf7d266 ""
   "C:/Users/filip/AppData/Local/Programs/MiKTeX/tex/latex/parskip/parskip.sty" 1615976160 4288 94714aa7f535440f33181fec52a31963 ""
-  "c:/Users/filip/Desktop/parallel_computing/kMeans/kMeans/theory/hamerly/hamerly.tex" 1735318713 9921 f4a6cc1af6d2e6079340b55df7daf542 ""
-  "hamerly.aux" 1735318716 597 b4d018e527da33b6ea2c8e6af4085a93 "pdflatex"
-  "hamerly.tex" 1735318713 9921 f4a6cc1af6d2e6079340b55df7daf542 ""
+  "c:/Users/filip/Desktop/parallel_computing/kMeans/kMeans/theory/hamerly/hamerly.tex" 1735320536 9918 209e2eb592da8b086fdae27bc4a4cca5 ""
+  "hamerly.aux" 1735320539 597 b4d018e527da33b6ea2c8e6af4085a93 "pdflatex"
+  "hamerly.tex" 1735320536 9918 209e2eb592da8b086fdae27bc4a4cca5 ""
   "imgs/triCC.png" 1733743013 69576 c7c5e29eb5abbb61bfe1dbf2b564e23b ""
   "imgs/triCCAfter.png" 1735242089 71280 530e875e42513cad339891c303eaacd2 ""
   "imgs/triangle.png" 1733723323 36244 a8a4261ec3986763e26bf178e076a273 ""
