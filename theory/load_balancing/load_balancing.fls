@@ -1,6 +1,6 @@
-PWD c:\Users\filip\Desktop\parallel_computing\kMeans\kMeans\basic_scripts\load_balancing\latex
+PWD c:\Users\filip\Desktop\parallel_computing\kMeans\kMeans\theory\load_balancing
 INPUT C:\Users\filip\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT c:\Users\filip\Desktop\parallel_computing\kMeans\kMeans\basic_scripts\load_balancing\latex\load_balancing.tex
+INPUT c:\Users\filip\Desktop\parallel_computing\kMeans\kMeans\theory\load_balancing\load_balancing.tex
 OUTPUT load_balancing.log
 INPUT C:\Users\filip\AppData\Local\Programs\MiKTeX\tex\latex\base\report.cls
 INPUT C:\Users\filip\AppData\Local\Programs\MiKTeX\tex\latex\base\report.cls
@@ -112,8 +112,6 @@ INPUT C:\Users\filip\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr12.tfm
 INPUT C:\Users\filip\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
 INPUT C:\Users\filip\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx10.tfm
 INPUT C:\Users\filip\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
-INPUT C:\Users\filip\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx7.tfm
-INPUT C:\Users\filip\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx5.tfm
 INPUT load_balancing.aux
 INPUT C:\Users\filip\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx10.pfb
 INPUT C:\Users\filip\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx10.pfb
@@ -127,8 +125,6 @@ INPUT C:\Users\filip\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\c
 INPUT C:\Users\filip\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi7.pfb
 INPUT C:\Users\filip\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr10.pfb
 INPUT C:\Users\filip\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr10.pfb
-INPUT C:\Users\filip\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr7.pfb
-INPUT C:\Users\filip\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr7.pfb
 INPUT C:\Users\filip\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
 INPUT C:\Users\filip\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
 INPUT C:\Users\filip\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmti10.pfb

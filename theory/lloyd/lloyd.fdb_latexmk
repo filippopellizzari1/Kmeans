@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1735320617.91377 "c:/Users/filip/Desktop/parallel_computing/kMeans/kMeans/theory/lloyd/lloyd.tex" "lloyd.pdf" "lloyd" 1735320619.76702 0
+["pdflatex"] 1735505906.84762 "c:/Users/filip/Desktop/parallel_computing/kMeans/kMeans/theory/lloyd/lloyd.tex" "lloyd.pdf" "lloyd" 1735505908.58911 0
   "C:/Users/filip/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1734100251 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/filip/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1733577066 11986913 e751051d0161d871cbc6a76442857e0a ""
   "C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
@@ -63,13 +63,13 @@
   "C:/Users/filip/AppData/Local/Programs/MiKTeX/tex/latex/kvsetkeys/kvsetkeys.sty" 1665066333 13815 760b0c02f691ea230f5359c4e1de23a7 ""
   "C:/Users/filip/AppData/Local/Programs/MiKTeX/tex/latex/l3backend/l3backend-pdftex.def" 1716480499 29785 9f93ab201fe5dd053afcc6c1bcf7d266 ""
   "C:/Users/filip/AppData/Local/Programs/MiKTeX/tex/latex/parskip/parskip.sty" 1615976160 4288 94714aa7f535440f33181fec52a31963 ""
-  "c:/Users/filip/Desktop/parallel_computing/kMeans/kMeans/theory/lloyd/lloyd.tex" 1735320616 6773 1fa65dc8b64f0a044a1465238fcf3c58 ""
+  "c:/Users/filip/Desktop/parallel_computing/kMeans/kMeans/theory/lloyd/lloyd.tex" 1735505903 9138 d3ba258e4a213bd6a894b51753e234c6 ""
   "imgs/asgnpoints.png" 1733584808 27989 0c2e3b51f5d268ca8e2fa409908b3b61 ""
   "imgs/reccens.png" 1733596632 27723 e915f6ca511e7efecde7220c06972875 ""
   "imgs/rndcens.png" 1733581662 21151 15d7845793ccb3d2db2696d4bb9ce84c ""
   "imgs/rndpoints.png" 1733578947 18853 58286f8fb692b7093602b266c65a14f2 ""
-  "lloyd.aux" 1735320619 1020 29cb3b42abb1e7c5e790fd93c5600bc2 "pdflatex"
-  "lloyd.tex" 1735320616 6773 1fa65dc8b64f0a044a1465238fcf3c58 ""
+  "lloyd.aux" 1735505908 1223 f759e248b232a18da5de385bb2f1f4cc "pdflatex"
+  "lloyd.tex" 1735505903 9138 d3ba258e4a213bd6a894b51753e234c6 ""
   (generated)
   "lloyd.aux"
   "lloyd.log"

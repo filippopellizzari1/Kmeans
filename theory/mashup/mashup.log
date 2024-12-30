@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.12.7)  30 DEC 2024 20:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.12.7)  30 DEC 2024 22:18
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**c:/Users/filip/Desktop/parallel_computing/kMeans/kMeans/theory/hamerly/hamerly.tex
-(c:/Users/filip/Desktop/parallel_computing/kMeans/kMeans/theory/hamerly/hamerly.tex
+**c:/Users/filip/Desktop/parallel_computing/kMeans/kMeans/theory/mashup/mashup.tex
+(c:/Users/filip/Desktop/parallel_computing/kMeans/kMeans/theory/mashup/mashup.tex
 LaTeX2e <2024-11-01>
 L3 programming layer <2024-11-02>
 (C:\Users\filip\AppData\Local\Programs\MiKTeX\tex/latex/base\report.cls
@@ -198,8 +198,15 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count298
 \l__pdf_internal_box=\box56
-) (hamerly.aux)
-\openout1 = `hamerly.aux'.
+) (mashup.aux
+
+LaTeX Warning: Label `alg:cap' multiply defined.
+
+
+LaTeX Warning: Label `alg:cap' multiply defined.
+
+)
+\openout1 = `mashup.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
 LaTeX Font Info:    ... okay on input line 16.
@@ -272,76 +279,121 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 22.
+<imgs/rndpoints.png, id=1, 411.03563pt x 310.15875pt>
+File: imgs/rndpoints.png Graphic file (type png)
+<use imgs/rndpoints.png>
+Package pdftex.def Info: imgs/rndpoints.png  used on input line 27.
+(pdftex.def)             Requested size: 226.8992pt x 171.21254pt.
+<imgs/rndcens.png, id=3, 421.07312pt x 304.13625pt>
+File: imgs/rndcens.png Graphic file (type png)
+<use imgs/rndcens.png>
+Package pdftex.def Info: imgs/rndcens.png  used on input line 35.
+(pdftex.def)             Requested size: 226.8992pt x 163.88771pt.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 46.
  (C:\Users\filip\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 22.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 46.
  (C:\Users\filip\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<imgs/triangle.png, id=1, 698.61pt x 697.60625pt>
-File: imgs/triangle.png Graphic file (type png)
-<use imgs/triangle.png>
-Package pdftex.def Info: imgs/triangle.png  used on input line 36.
-(pdftex.def)             Requested size: 63.02798pt x 62.93088pt.
-<imgs/triCC.png, id=3, 1002.74625pt x 1122.1925pt>
-File: imgs/triCC.png Graphic file (type png)
-<use imgs/triCC.png>
-Package pdftex.def Info: imgs/triCC.png  used on input line 45.
-(pdftex.def)             Requested size: 75.63434pt x 84.64026pt.
-<imgs/triCCAfter.png, id=4, 1521.685pt x 1003.75pt>
-File: imgs/triCCAfter.png Graphic file (type png)
-<use imgs/triCCAfter.png>
-Package pdftex.def Info: imgs/triCCAfter.png  used on input line 53.
-(pdftex.def)             Requested size: 151.26869pt x 99.76823pt.
-
-
-LaTeX Warning: Reference `eq:centrep' on page 1 undefined on input line 80.
-
+<imgs/asgnpoints.png, id=4, 413.545pt x 312.16624pt>
+File: imgs/asgnpoints.png Graphic file (type png)
+<use imgs/asgnpoints.png>
+Package pdftex.def Info: imgs/asgnpoints.png  used on input line 54.
+(pdftex.def)             Requested size: 226.8992pt x 171.27756pt.
+<imgs/reccens.png, id=5, 418.56375pt x 316.18124pt>
+File: imgs/reccens.png Graphic file (type png)
+<use imgs/reccens.png>
+Package pdftex.def Info: imgs/reccens.png  used on input line 69.
+(pdftex.def)             Requested size: 226.8992pt x 171.39629pt.
 
 
 [1
 
-{C:/Users/filip/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./imgs/triangle.png> <./imgs/triCC.png> <./imgs/triCCAfter.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 168--168
+{C:/Users/filip/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./imgs/rndpoints.png> <./imgs/rndcens.png> <./imgs/asgnpoints.png> <./imgs/reccens.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 159--160
 
  []
 
 
-Overfull \vbox (3.90334pt too high) has occurred while \output is active []
+Underfull \hbox (badness 1147) in paragraph at lines 161--163
+\OT1/cmr/m/n/10 sub-tracted from the av-er-age[]per[]class[p.centroid[]index]
+ []
+
+
+Underfull \hbox (badness 1314) in paragraph at lines 161--163
+\OT1/cmr/m/n/10 row and points[]per[]class[p.centroid[]index] need to be
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 161--163
+
+ []
 
 
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 210--211
+<imgs/triangle.png, id=30, 698.61pt x 697.60625pt>
+File: imgs/triangle.png Graphic file (type png)
+<use imgs/triangle.png>
+Package pdftex.def Info: imgs/triangle.png  used on input line 190.
+(pdftex.def)             Requested size: 88.2407pt x 88.10535pt.
+<imgs/triCC.png, id=31, 1122.1925pt x 1002.74625pt>
+File: imgs/triCC.png Graphic file (type png)
+<use imgs/triCC.png>
+Package pdftex.def Info: imgs/triCC.png  used on input line 199.
+(pdftex.def)             Requested size: 126.05597pt x 112.62813pt.
+<imgs/triCCAfter.png, id=32, 1003.75pt x 1521.685pt>
+File: imgs/triCCAfter.png Graphic file (type png)
+<use imgs/triCCAfter.png>
+Package pdftex.def Info: imgs/triCCAfter.png  used on input line 208.
+(pdftex.def)             Requested size: 126.05597pt x 191.09248pt.
+
+
+[3 <./imgs/triangle.png> <./imgs/triCC.png> <./imgs/triCCAfter.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 312--313
 
  []
 
 
 
-[3] (hamerly.aux)
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 365--366
+
+ []
+
+<imgs/non_balances_hamerly.png, id=42, 684.5575pt x 460.72125pt>
+File: imgs/non_balances_hamerly.png Graphic file (type png)
+<use imgs/non_balances_hamerly.png>
+Package pdftex.def Info: imgs/non_balances_hamerly.png  used on input line 400.
+(pdftex.def)             Requested size: 201.6903pt x 135.74286pt.
+
+
+[5 <./imgs/non_balances_hamerly.png>]
+
+[6] (mashup.aux)
  ***********
 LaTeX2e <2024-11-01>
 L3 programming layer <2024-11-02>
  ***********
 
 
-LaTeX Warning: There were undefined references.
+LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5892 strings out of 473682
- 95249 string characters out of 5719216
- 501298 words of memory out of 5000000
- 28925 multiletter control sequences out of 15000+600000
- 561386 words of font info for 49 fonts, out of 8000000 for 9000
+ 5949 strings out of 473682
+ 96478 string characters out of 5719216
+ 507506 words of memory out of 5000000
+ 28982 multiletter control sequences out of 15000+600000
+ 561991 words of font info for 51 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,10n,65p,646b,450s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on hamerly.pdf (3 pages, 272547 bytes).
+ 57i,10n,65p,646b,484s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on mashup.pdf (6 pages, 472416 bytes).
 PDF statistics:
- 74 PDF objects out of 1000 (max. 8388607)
+ 102 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
