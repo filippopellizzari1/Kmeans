@@ -1,5 +1,5 @@
 #ifndef __DATASET_H__
-#define _DATASET_H__
+#define __DATASET_H__
 
 #include <iostream>
 using namespace std;
