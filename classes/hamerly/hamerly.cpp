@@ -25,12 +25,15 @@ hamerly::hamerly( int _d, int _N, int _K, int _nThreads ) : lloyd( _d, _N, _K )
 
 hamerly::~hamerly()
 {
-    
-    if ( criticals != NULL )
-        delete[] criticals;
+    delete[] criticals;
 
-    if ( cdistances != NULL )
-        delete[] cdistances;
+    delete[] cdistances;
+
+    if ( critical_in_threads != NULL )
+        delete[] critical_in_threads;
+
+    if ( nC != NULL )
+        delete[] nC;
 }
 
 void hamerly::first_assignation()
