@@ -16,79 +16,120 @@
 \begin{document}
 \begin{minipage}[b]{0.48\textwidth}
   \section*{Algorithm testing}
-  What has been described up to this point allows to create a parallel kmeans clustering which exploit the Hamerly's algorithm. In this section we present the result of the tests that have been done using the Lloyd, Hamerly and parallelized Hamerly algorithm to compare the performances.
+  What has been described up to this point allows to create a parallel kmeans clustering which exploit the Hamerly's algorithm. In this section we present the result some tests that have been done using the Lloyd, Hamerly and parallelized Hamerly algorithm to compare the performances.
 
-  \subsubsection*{2D random dataset}
-  The first dataset on which the tests were run is a two dimensional, randomly generated, dataset containing 50000. In addition, 3 centroids have been also randomly generated. 
+  \section*{General testing methodology}
+  For every of the following tests has been used the same procedure.
+
+  For each of the presented datasets, first a lloyd model is initiated and executed to set a reference time which is then used to measure the speedup of the hamerly algorithm with 1 to 10 threads. 
   
-  The test starts by picking the first 500 points in the dataset and run the clustering on them to measure the time the algorithm takes, then the process is repeated by increasing the number of point by 500 points per iterations up to when the total number of points is used. Every time the number of points increases the time taken for the execution is measured such that it is possible to plot a time versus number of points graph.
+  The speedup is calculated as
+  \begin{equation}
+    speedup = 1 - \frac{hamerly\_time_T}{lloyd\_time}
+  \end{equation}
 
-  This process has been done for the aforementioned algorithms to produce the following graph
+  where $hamerly\_time_T$ is the time taken by the hamerly algorithm with T threads.
+
+  For every model, a fixed number of iterations (100) has been used to stop the respective algorithm after the same number of updates.
   
-  \begin{center} 
-    \includegraphics[width = 1\textwidth]{imgs/lh123_2Drnd.png}
-    \captionof{figure}{result of the test on the 2D randomly generated dataset}
-    \label{fig:lh123_2Drnd}
-  \end{center}
+  \section*{Randomly generated dataset }
+  The first dataset is a randomly generated one which allows to easily study how the algorithm scales over N, K and D because it is simple to implement an algorithm which increments one of the three while keeping fixed the other 2.
 
-  First of all notice that, for all the algorithm, the plot is a straight line. This is as expected if we consider the time complexity of both Lloyd and Hamerly algorithm eq. \ref{eq:lloydcomp} and \ref{eq:hamcomp}, in both cases it is possible to factor the number of points (N) out to obtain an eqation of the type mN.\\
-
-  Talking about the performance, the hamerly algorithm even with 1 thread shows a remarkable speedup with respect to the Lloyd algorithm. Considering the case with 50000 points, the Lloyd algorithm takes 1.81738 seconds while the hamerly algorithm with 1 thread takes 0.113175 seconds, which is approximately 93\% faster. 
-  
-  By increasing the number of threads, the plot shows an additional speedup: with 2 threads (0.0686808s) the speedup, with respect to the 1 thread hamerly algorithm (0.113175s), is approximately 40\%. As expected, the time taken with 2 threads is not twice the time with 1 thread because some part of the code still be executed sequentially.
-
-  Lastly, the time taken with 3 threads is 0.0500831 which result in an addition 27\% speedup. We can clearly see that by increasing
-\end{minipage}
-\hspace{0.1in}
-\begin{minipage}[b]{0.48\textwidth}
-  the number of threads the speedup tends to get smaller, this is as expected and can be proven mathematically. Assuming an ideal speedup, i.e. the time taken by T threads is $\frac{t_1}{T}$ where $t_1$ is the time taken by 1 thread, the time difference between 2 consecutive number of threads can be expressed as
-  \begin{equation*}
-    \Delta t = t_1 ( \frac{1}{T} - \frac{1}{T + 1} )
-  \end{equation*}
-  If T tends to infinity $\Delta t$ tends to zero.
-
-  \subsubsection*{3D random dataset}
-  To test with a different dataset, the second one used is a three dimension randomly generated dataset (always with 50000 points and 3 centoids).
-
-  The used procedure remains the same used also before, i.e. starting  with a low number of points and increase them gradually (500 points per iteration) to plot the time versus number of points graph.
+  \subsubsection*{Points scaling}
+  To scale over N, the testbench starts from a dataset with 3 centroids and a dimensionality of 2 while the number of points goes from 500 up to 50000. Figure \ref{fig:lh123_3Drnd} shows the testbench result.
 
   \begin{center} 
     \includegraphics[width = 1\textwidth]{imgs/lh123_3Drnd.png}
-    \captionof{figure}{result of the test on the 3D randomly generated dataset}
+    \captionof{figure}{result of the test on the 3D randomly generated dataset scaling over N}
     \label{fig:lh123_3Drnd}
   \end{center}
 
-  The previous pattern can be seen also in this plot: the lloyd algorithm is considerably slower than the hamerly algorithm with 1 thread and then an additional speedup is obtained by increasing the number of threads.
+  The result, for each model, is a straight line which can also be proven mathematically because if the number of centroids and the dimensionality are constants (fixed numbers) then, from equation \ref{eq:hameq} and \ref{eq:lloydeq}, it is possible to factor N out which results in a straight line equation (y = mx).
 
-  By considering the case with 50000 points the time taken by the different algorithms are 2.59356 second for Lloyd, 0.378505 seconds for Hamerly with 1 thread, 0.221699 seconds for Hamerly with 2 threads and 0.173437 seconds.
+\end{minipage}
+\hspace{0.1in}
+\begin{minipage}[b]{0.48\textwidth}
 
-  The speedup between two consecutive "lines" are respectively: 86\% (lloyd vs hamerly 1 thread), 42\% (hamerly 1 thread vs 2 threads), 22\% (hamerly 2 threads vs 3 threads). Again we notice that as the threads increase the speedup decreases.
 
-  \subsubsection*{Wine quality dataset}
-  To test the algorithm with a more realisitc dataset, we downloaded a dataset which contains features about different wines which can be used to group them in classes representing their quality between 0 and 10.
+  \subsubsection*{Centroids scaling}
+  The second testbench scales over K. Therefore, the testbench has a fixed number of points (3000) and dimension (3) while the centroids goes from 2 up to 100. Figure \ref{fig:lh123_3Drnd_cent} shows the result of the testbench.
 
-  The number of points in the dataset is 1143, with a dimensionality of 11. The centroids are 10 and were generated by randomly select 10 points between the whole dataset.\\
+  \begin{center} 
+    \includegraphics[width = 1\textwidth]{imgs/lh123_3Drnd_cent.png}
+    \captionof{figure}{result of the test on the 3D randomly generated dataset scaling over K}
+    \label{fig:lh123_3Drnd_cent}
+  \end{center}
 
+  Since K can be factored out from equations \ref{eq:hameq} and \ref{eq:lloydeq} when N and D are fixed, we see a straight line patter for each model.
+  
+  \subsubsection*{Dimension scaling}
+  Lastly, to study how the algorithm scales over D, this dataset has a fixed number of points (3000), a fixed number of centroids (3) while the dimensionality of the data goes from 2 up to 100. Figure \ref{fig:lh123_3Drnd_dim} show the result of the testbench.
+
+  \begin{center} 
+    \includegraphics[width = 1\textwidth]{imgs/lh123_3Drnd_dim.png}
+    \captionof{figure}{result of the test on the randomly generated dataset scaling over D}
+    \label{fig:lh123_3Drnd_dim}
+  \end{center}
+
+  \subsubsection*{Speedup}
+  To summarize the results, Figure \ref{fig:speedup} shows the speedup line for each of the previous graphs. In the latter it can be seen that the line corresponding to the D scaling has the lowest overall speedup but it is also the one where increasing the number of threads produces the most speedup, in other words, in this case, it is the one where using more threads is most effective.
+  
 
 \end{minipage}
 
 \newpage
 
 \begin{minipage}[b]{0.48\textwidth}
-  Other than that, the procedure remains the same but this time the step taken at each iteration to increase the number of points is 9. The result of this test is reported in the followiing graph
 
   \begin{center} 
-    \includegraphics[width = 1\textwidth]{imgs/lh123_wine.png}
+    \includegraphics[width = 0.9\textwidth]{imgs/rndspeedup.png}
+    \captionof{figure}{overall speedup on the random dataset}
+    \label{fig:speedup}
+  \end{center}
+
+  \section*{Wine quality dataset}
+  To test the algorithm with a more realisitc dataset, we downloaded\footnote{https://www.kaggle.com/datasets/yasserh/wine-quality-dataset} a dataset which contains features about different wines which can be used to group them in classes representing their quality between 0 and 10.
+
+  The number of points in the dataset is 1143, with a dimensionality of 11. The centroids are 10 and were generated by randomly select them between the whole dataset.\\
+
+  This dataset has been tested by scaling the points N starting from 9 up to 1143. Figure \ref{fig:lh123_wine} shows the result of the execution.
+
+  \begin{center} 
+    \includegraphics[width = 0.8\textwidth]{imgs/lh123_wine.png}
     \captionof{figure}{result of the test on wine dataset}
     \label{fig:lh123_wine}
   \end{center}
 
-  By considering the case with 50000 points the time taken by the different algorithms are 1.30501 second for Lloyd, 0.173809 seconds for Hamerly with 1 thread, 0.109867 seconds for Hamerly with 2 threads and 0.0925767 seconds.
-
-  The speedup between two consecutive "lines" are respectively: 87\% (lloyd vs hamerly 1 thread), 34\% (hamerly 1 thread vs 2 threads), 16\% (hamerly 2 threads vs 3 threads).
+  \subsubsection*{Speedup}
+  Figure \ref{fig:lh123_wine_speedup} shows the speedup of the algorithm when scaling both for N and D.
+  \begin{center} 
+    \includegraphics[width = 0.8\textwidth]{imgs/lh123_wine_speedup.png}
+    \captionof{figure}{speedup on the wine testbench}
+    \label{fig:lh123_wine_speedup}
+  \end{center}
 \end{minipage}
 \hspace{0.1in}
 \begin{minipage}[b]{0.48\textwidth}
-  
+  This time, there is not much difference between scaling over D and N because both lines are similar. In this case, scaling over the dimension means to use less attributes to classify the wine quality.
+
+  \section*{Speedup when the total workload is small }
+  If the overall workload is too small, it may be that increasing the number of threads is no longer an improvement but may be counterproductive. This happens because by increasing the number of threads, it increases also the overhead need to handle them and therefore if the workload is sufficiently high this overhead can be neglected but if the load is low the overhead can affect the overall speed.\\
+
+  Talking about the workload, as a first approximation, it can be related to the quantity $N\cdot K\cdot d$.
+
+  To show this phenomena, we downloaded another dataset\footnote{https://archive.ics.uci.edu/dataset/52/ionosphere}. The latter is set of values taken by some high-frequency antennas with the pourpose of finding free electrons in the ionosphere. In other words, the goal is to distinguish between good measurement, where some electrons have been found, and bad measurement where there are no evident electrons. Therefore, the centroids are 2, while the dimension is 34 and the number of points is 351. The workload, in this case, is:
+
+  \begin{equation*}
+    N\cdot K\cdot d = 351\cdot 2\cdot 34 = 23.869  
+  \end{equation*}
+  which is much smaller compared to the previous examples. Figure \ref{fig:iospeedup} shows the speedup with respect to lloyd time using an increasing number of threads.
+  \begin{center} 
+    \includegraphics[width = 0.8\textwidth]{imgs/iospeedup.png}
+    \captionof{figure}{speedup on the ionosphere testbench}
+    \label{fig:iospeedup}
+  \end{center}
+
+  The hamerly algorithm with 1 thread still be much faster than the lloyd version but, increasing the number of threads the speedup starts to become lower.
+
 \end{minipage}
 \end{document}

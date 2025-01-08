@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.12.7)  2 JAN 2025 23:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.12.7)  8 JAN 2025 14:48
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -371,41 +371,68 @@ Package pdftex.def Info: imgs/non_balances_hamerly.png  used on input line 402.
 
 
 [5 <./imgs/non_balances_hamerly.png>]
+Overfull \vbox (5.95604pt too high) has occurred while \output is active []
+
+
 
 [6]
-<imgs/lh123_2Drnd.png, id=49, 462.528pt x 346.896pt>
-File: imgs/lh123_2Drnd.png Graphic file (type png)
-<use imgs/lh123_2Drnd.png>
-Package pdftex.def Info: imgs/lh123_2Drnd.png  used on input line 560.
-(pdftex.def)             Requested size: 252.11194pt x 189.08368pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 565--566
-
- []
-
-<imgs/lh123_3Drnd.png, id=50, 462.528pt x 346.896pt>
+<imgs/lh123_3Drnd.png, id=49, 462.528pt x 346.896pt>
 File: imgs/lh123_3Drnd.png Graphic file (type png)
 <use imgs/lh123_3Drnd.png>
-Package pdftex.def Info: imgs/lh123_3Drnd.png  used on input line 587.
+Package pdftex.def Info: imgs/lh123_3Drnd.png  used on input line 571.
+(pdftex.def)             Requested size: 226.8992pt x 170.17636pt.
+<imgs/lh123_3Drnd_cent.png, id=50, 462.528pt x 346.896pt>
+File: imgs/lh123_3Drnd_cent.png Graphic file (type png)
+<use imgs/lh123_3Drnd_cent.png>
+Package pdftex.def Info: imgs/lh123_3Drnd_cent.png  used on input line 582.
+(pdftex.def)             Requested size: 226.8992pt x 170.17636pt.
+<imgs/lh123_3Drnd_dim.png, id=51, 462.528pt x 346.896pt>
+File: imgs/lh123_3Drnd_dim.png Graphic file (type png)
+<use imgs/lh123_3Drnd_dim.png>
+Package pdftex.def Info: imgs/lh123_3Drnd_dim.png  used on input line 596.
+(pdftex.def)             Requested size: 252.11194pt x 189.08368pt.
+<imgs/rndspeedup.png, id=52, 462.528pt x 346.896pt>
+File: imgs/rndspeedup.png Graphic file (type png)
+<use imgs/rndspeedup.png>
+Package pdftex.def Info: imgs/rndspeedup.png  used on input line 605.
 (pdftex.def)             Requested size: 226.8992pt x 170.17636pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 601--602
+Overfull \vbox (19.30855pt too high) has occurred while \output is active []
+
+
+
+[7 <./imgs/lh123_3Drnd.png> <./imgs/lh123_3Drnd_cent.png> <./imgs/lh123_3Drnd_dim.png> <./imgs/rndspeedup.png>]
+<imgs/lh123_wine.png, id=63, 462.528pt x 346.896pt>
+File: imgs/lh123_wine.png Graphic file (type png)
+<use imgs/lh123_wine.png>
+Package pdftex.def Info: imgs/lh123_wine.png  used on input line 622.
+(pdftex.def)             Requested size: 201.6903pt x 151.26906pt.
+<imgs/lh123_wine_speedup.png, id=64, 462.528pt x 346.896pt>
+File: imgs/lh123_wine_speedup.png Graphic file (type png)
+<use imgs/lh123_wine_speedup.png>
+Package pdftex.def Info: imgs/lh123_wine_speedup.png  used on input line 630.
+(pdftex.def)             Requested size: 201.6903pt x 151.26906pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 638--639
 
  []
 
-<imgs/lh123_wine.png, id=51, 462.528pt x 346.896pt>
-File: imgs/lh123_wine.png Graphic file (type png)
-<use imgs/lh123_wine.png>
-Package pdftex.def Info: imgs/lh123_wine.png  used on input line 606.
-(pdftex.def)             Requested size: 226.8992pt x 170.17636pt.
 
-Overfull \vbox (1.26048pt too high) has occurred while \output is active []
+Underfull \hbox (badness 3701) in paragraph at lines 642--643
+[]\OT1/cmr/m/n/10 To show this phe-nom-ena, we down-loaded an-other
+ []
+
+<imgs/iospeedup.png, id=65, 462.528pt x 346.896pt>
+File: imgs/iospeedup.png Graphic file (type png)
+<use imgs/iospeedup.png>
+Package pdftex.def Info: imgs/iospeedup.png  used on input line 659.
+(pdftex.def)             Requested size: 201.6903pt x 151.26906pt.
+
+Overfull \vbox (10.52354pt too high) has occurred while \output is active []
 
 
 
-[7 <./imgs/lh123_2Drnd.png> <./imgs/lh123_3Drnd.png> <./imgs/lh123_wine.png>]
-
-[8] (mashup.aux)
+[8 <./imgs/lh123_wine.png> <./imgs/lh123_wine_speedup.png> <./imgs/iospeedup.png>] (mashup.aux)
  ***********
 LaTeX2e <2024-11-01>
 L3 programming layer <2024-11-02>
@@ -416,17 +443,17 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5975 strings out of 473682
- 97111 string characters out of 5719216
- 509636 words of memory out of 5000000
- 29008 multiletter control sequences out of 15000+600000
- 561991 words of font info for 51 fonts, out of 8000000 for 9000
+ 6029 strings out of 473682
+ 98252 string characters out of 5719216
+ 509740 words of memory out of 5000000
+ 29054 multiletter control sequences out of 15000+600000
+ 565789 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,10n,65p,646b,484s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on mashup.pdf (8 pages, 594738 bytes).
+<C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on mashup.pdf (8 pages, 719362 bytes).
 PDF statistics:
- 121 PDF objects out of 1000 (max. 8388607)
+ 134 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 56 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 76 words of extra memory for PDF output out of 10000 (max. 10000000)
 

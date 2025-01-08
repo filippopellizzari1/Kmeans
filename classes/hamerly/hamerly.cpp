@@ -29,11 +29,11 @@ hamerly::~hamerly()
 
     delete[] cdistances;
 
-    if ( critical_in_threads != NULL )
-        delete[] critical_in_threads;
+    // if ( critical_in_threads != NULL )
+    //     delete[] critical_in_threads;
 
-    if ( nC != NULL )
-        delete[] nC;
+    // if ( nC != NULL )
+    //     delete[] nC;
 }
 
 void hamerly::first_assignation()
