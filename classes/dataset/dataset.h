@@ -23,8 +23,13 @@ class dataset
         void export_dataset( string points_file, string centroids_file );
         void load_dataset( string points_file, string centroids_file );
         double * get_point( int i );
+        double get_point_coord( int i , int j );
         double * get_centroid( int i );
+        double get_centroid_coord( int i, int j );
         double random_double( double min, double max );
+        int get_d();
+        int get_N();
+        int get_K();
 
         friend bool operator == ( const dataset &d1, const dataset &d2 );
 };

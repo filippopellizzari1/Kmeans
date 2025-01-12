@@ -198,12 +198,38 @@ void dataset::load_dataset( string points_file, string centroids_file )
 
 }
 
+int dataset::get_d()
+{
+    return d;
+}
+
+int dataset::get_N()
+{
+    return N;
+}
+
+int dataset::get_K()
+{
+    return K;
+}
+
+double dataset::get_point_coord( int i, int j )
+{
+    return points[i][j];
+}
+
+double dataset::get_centroid_coord( int i, int j )
+{
+    return centroids[i][j];
+}
+
 double * dataset::get_point( int i )
 {
     return points[i];
 }
 
-double * dataset::get_centroid( int i )
+double*  dataset::get_centroid( int i )
 {
     return centroids[i];
 }
+
