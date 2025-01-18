@@ -27,13 +27,13 @@ After downloading the project, copy the classes folder in your project, then in 
 To use the dataset class first initiate it by passing as parameters the number of points (N), the number of centroids (K) and the data dimensionality (D), then use one of the method to handle the dataset.
 
 ```cpp
-void rnd_dataset( double min, double max )
-void export_dataset( string points_file, string centroids_file )
-void load_dataset( string points_file, string centroids_file )
-double * get_point( int i )
-double get_point_coord( int i , int j )
-double * get_centroid( int i )
-double get_centroid_coord( int i, int j )
+void rnd_dataset( double min, double max );
+void export_dataset( string points_file, string centroids_file );
+void load_dataset( string points_file, string centroids_file );
+double * get_point( int i );
+double get_point_coord( int i , int j );
+double * get_centroid( int i );
+double get_centroid_coord( int i, int j );
 ```
 
 The methods `get_point()` and `get_ceentroid()` return an array containing the coordinates of the selected point or centroids.
@@ -44,8 +44,8 @@ To reproduce the results shown in the report, the used dataset can be load from 
 To use the lloyd (sequential) algorithm, initiate the class passing N, K, D. Then initiate the points and centroids using the methods 
 
 ```cpp
-void insert_point( int i, const Point * p )
-void insert_centroid( int i, const Point * c )
+void insert_point( int i, const Point * p );
+void insert_centroid( int i, const Point * c );
 ```
 
 To initaite a Point pass as parameter the dimensionality and the double array containing the coordinates of the point.
