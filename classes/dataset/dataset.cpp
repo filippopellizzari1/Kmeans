@@ -138,11 +138,8 @@ void dataset::load_dataset( string points_file, string centroids_file )
     string line;
 
     int line_count = 0;
-    while ( getline( file, line ) )
+    while ( getline( file, line ) && line_count < N )
     {
-        if ( line_count >= N )
-            throw runtime_error( "Found more points than the declared number, in " + points_file );
-
         string coord_s;
         double coord;
         int last_comma = 0;
@@ -170,11 +167,8 @@ void dataset::load_dataset( string points_file, string centroids_file )
 
     line_count = 0;
 
-    while ( getline( file, line ) )
+    while ( getline( file, line ) && line_count < K )
     {
-        if ( line_count >= K )
-            throw runtime_error( "Found more points than the declared number, in " + centroids_file );
-
         string coord_s;
         double coord;
         int last_comma = 0;

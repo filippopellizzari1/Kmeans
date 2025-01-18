@@ -2,6 +2,7 @@
 #include <cmath>
 using namespace std;
 
+#include <chrono>
 #include "../lloyd/lloyd.h"
 #include "../point/point.h"
 #include "MPIHamerly.h"
@@ -40,11 +41,11 @@ void MPIHamerly::splitItems( int nItems )
 void printDot( Dot * d )
 {
     cout << "(";
-    for ( int i = 0; i < DIMENSION; i++ )
+    for ( int i = 0; i < D; i++ )
     {
         cout << d->coords[i];
 
-        if ( i < DIMENSION - 1 )
+        if ( i < D - 1 )
             cout << ", ";
     }
     cout << ") cent: " << d -> centroid_index << " lb: " << d->lb << " ub: " << d->ub << endl;
@@ -63,7 +64,7 @@ MPI_Datatype createType()
 {
     // create a new type where we only send x, y and n
     int B[] = {
-        DIMENSION, // D int's
+        D, // D int's
         1, // size
         1, // lb
         1, // ub
@@ -78,7 +79,7 @@ MPI_Datatype createType()
         offsetof(struct Dot, centroid_index),
         offsetof(struct Dot, point_index)
     };
-    MPI_Datatype T[] = {
+    MPI_Datatype types[] = {
         MPI_DOUBLE,
         MPI_INT,
         MPI_DOUBLE,
@@ -88,7 +89,7 @@ MPI_Datatype createType()
     };
 
     MPI_Datatype mpi_dt_mystruct;
-    MPI_Type_create_struct(6, B, disp, T, &mpi_dt_mystruct);
+    MPI_Type_create_struct(6, B, disp, types, &mpi_dt_mystruct);
     MPI_Type_commit(&mpi_dt_mystruct);
 
     return mpi_dt_mystruct;
@@ -106,7 +107,7 @@ MPIHamerly::MPIHamerly(int _n, int _k, int * argc, char *** argv)
     centroids = new Dot[k];
     first_ass = false;
     local_items = NULL;
-    local_avg_class = new double[k * DIMENSION];
+    local_avg_class = new double[k * D];
     local_points_class = new int[k];
     cdistances = new double[k];
     crits_proc = new int[size];
@@ -123,16 +124,16 @@ MPIHamerly::MPIHamerly(int _n, int _k, int * argc, char *** argv)
         items_per_proc = new int[size];
         disp_proc = new int[size];
 
-        rel_avg_class = new double[k * DIMENSION];
+        rel_avg_class = new double[k * D];
         rel_points_class = new int[k];
-        avg_class = new double[k * DIMENSION];
+        avg_class = new double[k * D];
         points_class = new int[k];
         for ( int i = 0; i < k; i++ )
         {
             points_class[i] = 0;
 
-            for ( int j = 0; j < DIMENSION; j++ )
-                avg_class[ i * DIMENSION + j ] = 0;
+            for ( int j = 0; j < D; j++ )
+                avg_class[ i * D + j ] = 0;
         }
 
         criticals = NULL;
@@ -173,13 +174,13 @@ void MPIHamerly::init_point( int i, double * coords )
 {
     if ( rank == 0 )
     {
-        points[i].size = DIMENSION;
+        points[i].size = D;
         points[i].lb = 0;
         points[i].ub = 0;
         points[i].centroid_index = -1;
         points[i].point_index = i;
 
-        for ( int j = 0; j < DIMENSION; j++ )
+        for ( int j = 0; j < D; j++ )
             points[i].coords[j] = coords[j];
     }
 }
@@ -188,13 +189,13 @@ void MPIHamerly::init_centroid( int i, double * coords )
 {
     if ( rank == 0 )
     {
-        centroids[i].size = DIMENSION;
+        centroids[i].size = D;
         centroids[i].lb = 0;
         centroids[i].ub = 0;
         centroids[i].centroid_index = -1;
         centroids[i].point_index = i;
 
-        for ( int j = 0; j < DIMENSION; j++ )
+        for ( int j = 0; j < D; j++ )
             centroids[i].coords[j] = coords[j];
     }
 
@@ -253,14 +254,14 @@ int MPIHamerly::closest_centroid( Dot * p, double * distmin, double * distsecmin
         local_points_class[ cent_index ] += 1;
 
         // since the point is in another class it no longer affect the average of the previous class
-        for ( int j = 0; j < DIMENSION; j++ )
+        for ( int j = 0; j < D; j++ )
         {
             double coord = p->coords[j];
 
             if ( p->centroid_index != -1 )
-                local_avg_class[ p -> centroid_index * DIMENSION + j] -= coord;
+                local_avg_class[ p -> centroid_index * D + j] -= coord;
 
-            local_avg_class[cent_index * DIMENSION + j] += coord;
+            local_avg_class[cent_index * D + j] += coord;
         }
     }
 
@@ -291,7 +292,7 @@ void MPIHamerly::refresh_assignation()
 
         MPI_Gatherv( local_items, proc_items, dot_type, criticals, items_per_proc, disp_proc, dot_type, 0, MPI_COMM_WORLD );
         MPI_Reduce( local_points_class, rel_points_class, k, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD );
-        MPI_Reduce( local_avg_class, rel_avg_class, k * DIMENSION, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD );
+        MPI_Reduce( local_avg_class, rel_avg_class, k * D, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD );
 
         // process zero updates avg_class and point_class by summing the respecctive relative variable which contains the total changes done by all processes in this iteration
         if ( rank == 0 )
@@ -300,8 +301,8 @@ void MPIHamerly::refresh_assignation()
             {
                 points_class[i] += rel_points_class[i];
 
-                for ( int j = 0; j < DIMENSION; j++ )
-                    avg_class[i * DIMENSION + j] += rel_avg_class[i * DIMENSION + j];
+                for ( int j = 0; j < D; j++ )
+                    avg_class[i * D + j] += rel_avg_class[i * D + j];
             }
 
             // process zero has also to update the points by changing the values of the critical points with the one in the criticals array (which has been modified by the processes)
@@ -335,7 +336,7 @@ void MPIHamerly::first_assignation()
 
     MPI_Gatherv( local_items, proc_items, dot_type, points, items_per_proc, disp_proc, dot_type, 0, MPI_COMM_WORLD );
     MPI_Reduce( local_points_class, rel_points_class, k, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD );
-    MPI_Reduce( local_avg_class, rel_avg_class, k * DIMENSION, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD );
+    MPI_Reduce( local_avg_class, rel_avg_class, k * D, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD );
     
     // process zero updates avg_class and point_class by summing the respecctive relative variable which contains the total changes done by all processes in this iteration
     if ( rank == 0 )
@@ -344,8 +345,8 @@ void MPIHamerly::first_assignation()
         {
             points_class[i] += rel_points_class[i];
 
-            for ( int j = 0; j < DIMENSION; j++ )
-                avg_class[i * DIMENSION + j] += rel_avg_class[i * DIMENSION + j];
+            for ( int j = 0; j < D; j++ )
+                avg_class[i * D + j] += rel_avg_class[i * D + j];
         }
     }
 
@@ -358,8 +359,8 @@ void MPIHamerly::preAssignation_init()
     {
         local_points_class[i] = 0;
 
-        for ( int j = 0; j < DIMENSION; j++ )
-            local_avg_class[ i * DIMENSION + j ] = 0;
+        for ( int j = 0; j < D; j++ )
+            local_avg_class[ i * D + j ] = 0;
     }
 }
 
@@ -414,21 +415,21 @@ void MPIHamerly::update_centroids()
 {
     splitItems( k );
 
-    int items_per_procD[size]; // calculate items_per_proc * DIMENSION and disp_proc * DIMENSION because the array avg_class has a lenght of k * DIMENSION
+    int items_per_procD[size]; // calculate items_per_proc * D and disp_proc * D because the array avg_class has a lenght of k * D
     int disp_procD[size];
 
     if ( rank == 0 )
     {
         for ( int i = 0; i < size; i++ )
         {
-            items_per_procD[i] = items_per_proc[i] * DIMENSION;
-            disp_procD[i] = disp_proc[i] * DIMENSION;
+            items_per_procD[i] = items_per_proc[i] * D;
+            disp_procD[i] = disp_proc[i] * D;
         }
     }
 
     MPI_Scatterv( centroids, items_per_proc, disp_proc, dot_type, local_items, proc_items, dot_type, 0, MPI_COMM_WORLD );
     MPI_Scatterv( points_class, items_per_proc, disp_proc, MPI_INT, local_points_class, proc_items, MPI_INT, 0, MPI_COMM_WORLD );
-    MPI_Scatterv( avg_class, items_per_procD, disp_procD, MPI_DOUBLE, local_avg_class, proc_items * DIMENSION, MPI_DOUBLE, 0, MPI_COMM_WORLD );
+    MPI_Scatterv( avg_class, items_per_procD, disp_procD, MPI_DOUBLE, local_avg_class, proc_items * D, MPI_DOUBLE, 0, MPI_COMM_WORLD );
 
     // update the centroids
     for ( int i = 0; i < proc_items; i++ )
@@ -438,10 +439,10 @@ void MPIHamerly::update_centroids()
 
         if ( local_points_class[i] != 0 )
         {
-            for ( int j = 0; j < DIMENSION; j++ )
+            for ( int j = 0; j < D; j++ )
             {
                 double old_coord = c->coords[j];
-                double new_coord = local_avg_class[i * DIMENSION + j] / local_points_class[i];
+                double new_coord = local_avg_class[i * D + j] / local_points_class[i];
                 
                 sumofsquare += pow( old_coord - new_coord, 2 );
                 c->coords[j] = new_coord;
@@ -458,12 +459,14 @@ void MPIHamerly::update_centroids()
 
     maxdist_index = findTwoMax( cdistances, k, &maxdist, &secmaxdist );
 
+
     update_criticals();
 }
 
 void MPIHamerly::update_criticals()
 {
     splitItems( n );
+
 
     MPI_Scatterv( points, items_per_proc, disp_proc, dot_type, local_items, proc_items, dot_type, 0, MPI_COMM_WORLD );
 
@@ -510,10 +513,12 @@ void MPIHamerly::update_criticals()
     int start = 0;
     for ( int i = 0; i < rank; i++ )
         start += crits_proc[i];
-    
-    Dot local_crits[n_found];
+
+    Dot * local_crits = NULL;
     if ( n_found > 0 )
     {
+        local_crits = new Dot[n_found];
+
         for ( int i = 0; i < n_found; i++ )
         {
             Dot * p = found_criticals.back();
@@ -523,7 +528,7 @@ void MPIHamerly::update_criticals()
             local_crits[i].centroid_index = p->centroid_index;
             local_crits[i].point_index = p->point_index;
 
-            for ( int j = 0; j < DIMENSION; j++ )
+            for ( int j = 0; j < D; j++ )
                 local_crits[i].coords[j] = p -> coords[j];
 
             found_criticals.pop_back();
@@ -539,6 +544,9 @@ void MPIHamerly::update_criticals()
         // gather all the criticals in a single array ( "criticals" )
         MPI_Gatherv( local_crits, n_found, dot_type, criticals, crits_proc, crit_disp, dot_type, 0, MPI_COMM_WORLD );
     }
+
+    if ( local_crits != NULL )
+        delete[] local_crits;
 }
 
 bool MPIHamerly::double_eq( double f1, double f2 )
@@ -568,7 +576,7 @@ void MPIHamerly::check_equal( lloyd * l )
             Point * lc = l -> get_centroid( i );
             Dot * hc = &centroids[i];
 
-            for ( int j = 0; j < DIMENSION && eq; j++ )
+            for ( int j = 0; j < D && eq; j++ )
             {
                 if ( !double_eq(lc->get_coord( j ), hc->coords[j]) )
                     eq = false;
@@ -577,5 +585,23 @@ void MPIHamerly::check_equal( lloyd * l )
 
         if ( eq ) cout << "equal";
         else cout << "not equal";
+    }
+}
+
+void MPIHamerly::start_time()
+{
+    if ( rank == 0 )
+        start = chrono::high_resolution_clock::now();
+}
+
+void MPIHamerly::elapsed()
+{
+    if ( rank == 0 )
+    {
+        chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
+        chrono::duration<double> elapsed = chrono::duration_cast<chrono::duration<double>>(end - start);
+        double time = elapsed.count();
+
+        cout << time << endl;
     }
 }

@@ -2,13 +2,14 @@
 #define __MPIHAMERLY_H__
 
 #include <mpi.h>
-#define DIMENSION 4
+#include <chrono>
+#include "../settings.h"
 #define EPS 0.0001
 
 class lloyd;
 struct Dot
 {
-    double coords[DIMENSION];
+    double coords[D];
     int size;
     double lb;
     double ub;
@@ -44,6 +45,7 @@ class MPIHamerly
     double * avg_class; // sum of coordinates of points in the same calss ( length = k x DIMENSION )
     int * rel_points_class; // number of points the same class ( length = k )
     double * rel_avg_class; // sum of coordinates of points in the same calss ( length = k x DIMENSION )
+    chrono::high_resolution_clock::time_point start;
 
     void refresh_assignation();
     void first_assignation();
@@ -65,6 +67,8 @@ class MPIHamerly
 
         void print();
         void check_equal( lloyd * l );
+        void start_time();
+        void elapsed();
 };
 
 #endif
