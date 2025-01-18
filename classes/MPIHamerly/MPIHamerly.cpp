@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <fstream>
 using namespace std;
 
 #include <chrono>
@@ -95,10 +96,10 @@ MPI_Datatype createType()
     return mpi_dt_mystruct;
 }
 
-MPIHamerly::MPIHamerly(int _n, int _k, int * argc, char *** argv)
+MPIHamerly::MPIHamerly(int * argc, char *** argv)
 {
-    n = _n;
-    k = _k;
+    n = N;
+    k = K;
     MPI_Init( argc, argv );
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
@@ -603,5 +604,51 @@ void MPIHamerly::elapsed()
         double time = elapsed.count();
 
         cout << time << endl;
+    }
+}
+
+void MPIHamerly::export_data( string filename )
+{
+    if ( rank == 0 )
+    {
+        // open the file
+        fstream file;
+        file.open( filename, ios::out );
+
+        if ( !file.is_open() )
+            throw runtime_error( "Couldn't open the file " + filename );
+
+        file << "number_points: " << N ;
+        file << "; number_centroids: " << K << endl;
+
+        // Write all the centroids
+        file << "Centroids" << endl;
+        for ( int i = 0; i < K; i++ )
+        {
+            for ( int j = 0; j < D; j++ )
+            {
+                file << centroids[i].coords[j] << ", ";
+            }
+            
+            file << centroids[i].ub << ", ";
+            file << centroids[i].lb << ", ";
+            file << centroids[i].centroid_index << endl;
+        }
+
+        // white all the points
+        file << "Points" << endl;
+        for ( int i = 0; i < N; i++ )
+        {
+            for ( int j = 0; j < D; j++ )
+            {
+                file << points[i].coords[j] << ", ";
+            }
+            
+            file << points[i].ub << ", ";
+            file << points[i].lb << ", ";
+            file << points[i].centroid_index << endl;
+        }
+
+        file.close();
     }
 }

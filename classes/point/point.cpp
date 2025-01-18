@@ -7,7 +7,6 @@
 Point::Point()
 {
     d = 0;
-    centroid = NULL;
     dist = 0;
     ub = 0;
     lb = 0;
@@ -20,7 +19,6 @@ Point::Point( int _d, double * _coords )
     dist = 0;
     ub = 0;
     lb = 0;
-    centroid = NULL;
     d = _d;
     centroid_index = -1;
 
@@ -33,7 +31,6 @@ Point::Point( int _d, double * _coords )
 Point::Point( const Point &p )
 {
     d = p.get_dim();
-    centroid = p.get_centroid();
     ub = p.ub;
     lb = p.lb;
     dist = p.dist;
@@ -93,13 +90,7 @@ int Point::get_dim() const
 
 void Point::set_centroid( Point * _centroid, int _centroid_index )
 {
-    centroid = _centroid;
     centroid_index = _centroid_index;
-}
-
-Point * Point::get_centroid() const
-{
-    return centroid;
 }
 
 ostream& operator <<( ostream &os, const Point &p )
@@ -190,7 +181,6 @@ Point operator + ( const Point &p1, const Point &p2 )
 Point& Point::operator= ( const Point &p )
 {
     d = p.get_dim();
-    centroid = p.get_centroid();
     ub = p.ub;
     lb = p.lb;
     dist = p.dist;

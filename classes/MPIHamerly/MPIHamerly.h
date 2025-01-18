@@ -56,7 +56,7 @@ class MPIHamerly
     int closest_centroid( Dot * p, double * mindist, double * secmindist );
     bool double_eq( double f1, double f2 );
     public:
-        MPIHamerly( int _n, int _k, int * argc, char *** argv );
+        MPIHamerly( int * argc, char *** argv );
         ~MPIHamerly();
 
         void init_point(int i, double * coords);
@@ -64,6 +64,8 @@ class MPIHamerly
         
         void assign_points();
         void update_centroids();
+
+        void export_data( string filename );
 
         void print();
         void check_equal( lloyd * l );

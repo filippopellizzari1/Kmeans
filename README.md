@@ -38,8 +38,6 @@ double get_centroid_coord( int i, int j );
 
 The methods `get_point()` and `get_ceentroid()` return an array containing the coordinates of the selected point or centroids.
 
-To reproduce the results shown in the report, the used dataset can be load from the datasets folder.
-
 ### Lloyd class
 To use the lloyd (sequential) algorithm, initiate the class passing N, K, D. Then initiate the points and centroids using the methods 
 
@@ -74,6 +72,12 @@ void init_centroid(int i, double * coords);
 ```
 
 Finally perform the classification using the same lloyd methods.
+
+### Export the classification
+After the clustering is done it is possible to call the method to export the result
+```cpp
+void MPIHamerly::export_data( string filename )
+```
 
 ## Compile and run the code
 ### OMP version

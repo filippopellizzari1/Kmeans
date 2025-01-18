@@ -8,7 +8,6 @@ class Point
 {
     private:
         int d;
-        Point * centroid;
         double * coords;
 
     public:
