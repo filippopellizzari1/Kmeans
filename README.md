@@ -27,29 +27,39 @@ After downloading the project, copy the classes folder in your project, then in 
 To use the dataset class first initiate it by passing as parameters the number of points (N), the number of centroids (K) and the data dimensionality (D), then use one of the method to handle the dataset.
 
 ```cpp
-void load_dataset()
-void export_dataset()
-void rnd_dataset()
+void rnd_dataset( double min, double max )
+void export_dataset( string points_file, string centroids_file )
+void load_dataset( string points_file, string centroids_file )
+double * get_point( int i )
+double get_point_coord( int i , int j )
+double * get_centroid( int i )
+double get_centroid_coord( int i, int j )
 ```
+
+The methods `get_point()` and `get_ceentroid()` return an array containing the coordinates of the selected point or centroids.
+
+To reproduce the results shown in the report, the used dataset can be load from the datasets folder.
 
 ### Lloyd class
 To use the lloyd (sequential) algorithm, initiate the class passing N, K, D. Then initiate the points and centroids using the methods 
 
 ```cpp
-void insert_point()
-void insert_centroid()
+void insert_point( int i, const Point * p )
+void insert_centroid( int i, const Point * c )
 ```
+
+To initaite a Point pass as parameter the dimensionality and the double array containing the coordinates of the point.
 
 Note: the dataset class can be used to load a dataset (or generate one) and then initiate the other classes (lloyd, hamerly, MPIHamerly) by extracting the points and passing them as parameter for the points and centroids init methods.
 
 At this point, use the methods below to perform the classification for an arbitrary number of time.
 
 ```cpp
-void point_assignation()
-void centroid_update()
+void update_centroids();
+void assign_points();
 ```
 
-### Hamerly class
+### Hamerly (OMP) class
 To use Hamerly's OMP version initiate the class hamerly passing as parameter N, K, D and the number of threads to use T.
 
 Then, initiate the points and run the classification as in the lloyd class.
@@ -59,14 +69,11 @@ To use Hamerly's MPI version initiate the class MPIHamerly passing the address o
 
 Then, initiate the points using the methods 
 ```cpp
-void init_point()
-void init_centroid()
+void init_point(int i, double * coords);
+void init_centroid(int i, double * coords);
 ```
 
 Finally perform the classification using the same lloyd methods.
-
-## Export the classification result
-For the moment, exporting the results is a bit of a elaborate operation and will be subject of future work. Anyway this is how it can be done: first initiate another dataset object (or use the old one) then iterate for the number of points and save them one by one in the dataset variable using `void insert_point()` then do the same this for the centroids using the method `void insert_centroid()`. Finally call the method `void export_dataset()`.
 
 ## Compile and run the code
 ### OMP version
@@ -76,13 +83,13 @@ g++ yourfile.cpp ./classes/hamerly/hamerly.cpp ./classes/lloyd/lloyd.cpp ./class
 ```
 To run it, execute the generated file
 ```console
-./yourfile.out (or yourfile.exe in windows)
+./outfile
 ```
 ### MPI version
-To compile an MPI code there are two possible ways the first one is to use g++ with the option -lmpich, the path to the mpi library and the required .cpp files
+To compile an MPI code there are two possible ways. The first one is to use g++ with the option -lmpich, the path to the mpi library and the required .cpp files
 
 ```console
-g++ yourfile.cpp ./classes/MPIHamerly/MPIHamerly.cpp ./classes/dataset/dataset.cpp -I/path/to/mpi.h -L/path/to/mpi -lmpich 
+g++ yourfile.cpp ./classes/MPIHamerly/MPIHamerly.cpp ./classes/dataset/dataset.cpp -I /path/to/mpi.h -L /path/to/mpi -lmpich 
 ```
 
 The second one is to use the command mpicxx 
@@ -101,5 +108,5 @@ To run MPI on windows it is possible to install the Microsoft MPI library (msmpi
 
 To run the code use
 ```
-mpiexec –n <number of processing elements> ./<executable file>
+mpiexec –n <num_processes> ./<executable file>
 ```
