@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.12.7)  19 JAN 2025 21:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.12.7)  19 JAN 2025 22:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -407,12 +407,12 @@ Package hyperref Info: Link coloring OFF on input line 15.
 \@outlinefile=\write3
 \openout3 = `report.out'.
 
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 42.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 62.
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 43.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 63.
  (C:\Users\filip\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 62.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 63.
  (C:\Users\filip\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
@@ -430,7 +430,7 @@ Underfull \vbox (badness 1117) has occurred while \output is active []
 <imgs/times.jpg, id=119, 1674.255pt x 941.5175pt>
 File: imgs/times.jpg Graphic file (type jpg)
 <use imgs/times.jpg>
-Package pdftex.def Info: imgs/times.jpg  used on input line 158.
+Package pdftex.def Info: imgs/times.jpg  used on input line 159.
 (pdftex.def)             Requested size: 412.80157pt x 232.13199pt.
 
 
@@ -439,24 +439,24 @@ Package pdftex.def Info: imgs/times.jpg  used on input line 158.
 <imgs/suiono.jpg, id=132, 1284.8pt x 963.6pt>
 File: imgs/suiono.jpg Graphic file (type jpg)
 <use imgs/suiono.jpg>
-Package pdftex.def Info: imgs/suiono.jpg  used on input line 183.
+Package pdftex.def Info: imgs/suiono.jpg  used on input line 184.
 (pdftex.def)             Requested size: 154.80157pt x 116.09752pt.
 <imgs/sumedpts.jpg, id=133, 1674.255pt x 418.56375pt>
 File: imgs/sumedpts.jpg Graphic file (type jpg)
 <use imgs/sumedpts.jpg>
-Package pdftex.def Info: imgs/sumedpts.jpg  used on input line 189.
+Package pdftex.def Info: imgs/sumedpts.jpg  used on input line 190.
 (pdftex.def)             Requested size: 438.60315pt x 109.64789pt.
 <imgs/suhghpts.jpg, id=134, 1674.255pt x 418.56375pt>
 File: imgs/suhghpts.jpg Graphic file (type jpg)
 <use imgs/suhghpts.jpg>
-Package pdftex.def Info: imgs/suhghpts.jpg  used on input line 195.
+Package pdftex.def Info: imgs/suhghpts.jpg  used on input line 196.
 (pdftex.def)             Requested size: 438.60315pt x 109.64789pt.
 
 
 [3 <./imgs/times.jpg> <./imgs/suiono.jpg>]
 
 
-Underfull \hbox (badness 6412) in paragraph at lines 222--223
+Underfull \hbox (badness 6412) in paragraph at lines 223--224
 []\OT1/ptm/m/n/8 MSMPI, []$https : / / www . microsoft . com / en-[]US / download / details . aspx ? id =
  []
 
@@ -489,15 +489,15 @@ Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: 04D72BFF1F082F7105B0100958A4E0C4;3720.
  ) 
 Here is how much of TeX's memory you used:
- 11879 strings out of 473682
- 186807 string characters out of 5719216
+ 11880 strings out of 473682
+ 186814 string characters out of 5719216
  604201 words of memory out of 5000000
  34767 multiletter control sequences out of 15000+600000
- 596005 words of font info for 108 fonts, out of 8000000 for 9000
+ 597141 words of font info for 109 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,8n,79p,1094b,577s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on report.pdf (5 pages, 696316 bytes).
+Output written on report.pdf (5 pages, 697779 bytes).
 PDF statistics:
  214 PDF objects out of 1000 (max. 8388607)
  45 named destinations out of 1000 (max. 500000)

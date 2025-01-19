@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1737320381.19926 "c:/Users/filip/Desktop/parallel_computing/kMeans/kMeans/theory/report/report.tex" "report.pdf" "report" 1737320383.35316 0
+["pdflatex"] 1737322862.70878 "c:/Users/filip/Desktop/parallel_computing/kMeans/kMeans/theory/report/report.tex" "report.pdf" "report" 1737322864.76847 0
   "C:/Users/filip/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1737229272 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/filip/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1733577066 11986913 e751051d0161d871cbc6a76442857e0a ""
   "C:/Users/filip/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458473887 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -99,14 +99,14 @@
   "C:/Users/filip/AppData/Local/Programs/MiKTeX/tex/latex/rerunfilecheck/rerunfilecheck.sty" 1657800696 9714 ba3194bd52c8499b3f1e3eb91d409670 ""
   "C:/Users/filip/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/filip/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "c:/Users/filip/Desktop/parallel_computing/kMeans/kMeans/theory/report/report.tex" 1737320377 18030 fad57e258f337b42659ef1f01e31ea96 ""
+  "c:/Users/filip/Desktop/parallel_computing/kMeans/kMeans/theory/report/report.tex" 1737322860 18087 a1037c864446b19a039900123046c1a3 ""
   "imgs/suhghpts.jpg" 1737318266 129908 c2bd7d63c5c555ad231f7af2db300239 ""
   "imgs/suiono.jpg" 1737318296 125187 8e4ede72a74a1865509cfc6b3fedd410 ""
   "imgs/sumedpts.jpg" 1737318343 130884 ba79271a526310166a1409085207dc68 ""
   "imgs/times.jpg" 1737320306 166766 0ea26c553625d8d7c66b79d6e86e8bba ""
-  "report.aux" 1737320382 4765 8757d2543f47aa302240648fbaa8533e "pdflatex"
-  "report.out" 1737320382 3720 04d72bff1f082f7105b0100958a4e0c4 "pdflatex"
-  "report.tex" 1737320377 18030 fad57e258f337b42659ef1f01e31ea96 ""
+  "report.aux" 1737322864 4765 8757d2543f47aa302240648fbaa8533e "pdflatex"
+  "report.out" 1737322864 3720 04d72bff1f082f7105b0100958a4e0c4 "pdflatex"
+  "report.tex" 1737322860 18087 a1037c864446b19a039900123046c1a3 ""
   (generated)
   "report.aux"
   "report.log"
