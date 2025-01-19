@@ -21,7 +21,7 @@ The settings file is not required when working with the classes expect for MPIHa
 Therefore know that to initiate the MPIHamerly class, first modify the settings file to fit the dataset. For all the other classes, using the settings file is not required as the dataset dimensions can be given as the constructor parameter.
 
 ## Usage
-After downloading the project, copy the classes folder in your project, then in you c++ file include the classes you want to use.
+After downloading the project, copy the classes folder in your project, then in you c++ file include the classes you want to use. In the folder examples, can be found the files used for testing the algorithms which can be used as they are, i.e. generating a random dataset, or it is possible to download one online (some links are present in the report.pdf inside the theory folder).
 
 ### Dataset class
 To use the dataset class first initiate it by passing as parameters the number of points (N), the number of centroids (K) and the data dimensionality (D), then use one of the method to handle the dataset.
@@ -76,7 +76,7 @@ Finally perform the classification using the same lloyd methods.
 ### Export the classification
 After the clustering is done it is possible to call the method to export the result
 ```cpp
-void MPIHamerly::export_data( string filename )
+void export_data( string filename )
 ```
 
 ## Compile and run the code
