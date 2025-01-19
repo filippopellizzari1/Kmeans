@@ -38,6 +38,15 @@ double get_centroid_coord( int i, int j );
 
 The methods `get_point()` and `get_ceentroid()` return an array containing the coordinates of the selected point or centroid.
 
+Values inside the dataset files (points and centroids file) have to be formatted one point per line, and the coordinates have to be separated by commas with no spaces or text.
+
+```cpp
+0.001,10.89,...,5.76
+1.42,7.59,...,9.00
+...
+```
+
+
 ### Lloyd class
 To use the lloyd (sequential) algorithm, initiate the class passing N, K, D. Then initiate the points and centroids using the methods 
 
