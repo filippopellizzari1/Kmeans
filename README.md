@@ -36,7 +36,7 @@ double * get_centroid( int i );
 double get_centroid_coord( int i, int j );
 ```
 
-The methods `get_point()` and `get_ceentroid()` return an array containing the coordinates of the selected point or centroids.
+The methods `get_point()` and `get_ceentroid()` return an array containing the coordinates of the selected point or centroid.
 
 ### Lloyd class
 To use the lloyd (sequential) algorithm, initiate the class passing N, K, D. Then initiate the points and centroids using the methods 
@@ -46,11 +46,11 @@ void insert_point( int i, const Point * p );
 void insert_centroid( int i, const Point * c );
 ```
 
-To initaite a Point pass as parameter the dimensionality and the double array containing the coordinates of the point.
+To initiate a Point pass as parameters the dimensionality and the double array containing the coordinates of the point.
 
 Note: the dataset class can be used to load a dataset (or generate one) and then initiate the other classes (lloyd, hamerly, MPIHamerly) by extracting the points and passing them as parameter for the points and centroids init methods.
 
-At this point, use the methods below to perform the classification for an arbitrary number of time.
+At this point, use the methods below to perform the classification for an arbitrary number of times.
 
 ```cpp
 void update_centroids();
